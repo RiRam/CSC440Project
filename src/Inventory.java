@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.Properties;
+import java.util.ArrayList;
 
 
 /**
@@ -29,7 +30,7 @@ public class Inventory {
 	private final String dbName = "Warehouse";
 	
 	/** The connection to the database */
-	private Connection conn = null;
+	private static Connection conn = null;
 	
 	/**
 	 * Driver of stuffs
@@ -37,8 +38,6 @@ public class Inventory {
 	public static void main(String[] args) 
 	{
 		Inventory inv = new Inventory();
-		
-		System.out.println(inv.getNameByID(1));
 		inv.addItem(6, "Orange desk", "An orange desk.", 1, 2, "F");
 		inv.updateNameByID(6, "Orange computer desk");
 		inv.updateDescriptionByID(6, "An orange computer desk.");
@@ -448,8 +447,6 @@ public class Inventory {
 		try {
 	        stmt = conn.createStatement();
 	        rs = stmt.executeQuery("SELECT * FROM Inventory WHERE ItemID=" + ID);
-	        
-			rs.first();
 			
 	        newItem = new Item(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6));
 			
@@ -460,6 +457,57 @@ public class Inventory {
 		return newItem;
 		
 		//return new Item(ID, getNameByID(ID), getDescriptionByID(ID), getAvailableByID(ID), getPickedByID(ID), getLocationByID(ID));
+	}
+	
+	/**
+	 * Return all items present in the table
+	 * 
+	 * @return ArrayList<Item>
+	 */
+	public ArrayList<Item> getAllItems()
+	{
+		ArrayList<Item> all = new ArrayList<Item>();
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+	        stmt = conn.createStatement();
+	        rs = stmt.executeQuery("SELECT * FROM Inventory");
+			
+			rs.first();
+			while(!rs.isAfterLast())
+			{
+				all.add(new Item(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6)));
+			
+				rs.next();
+			}
+			
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+			return all;
+	}
+	
+	
+	/**
+	 * Returns the next Item ID
+	 * 
+	 * @return int - next Item ID (i.e. if the current highest Item ID is 3, returns 4)
+	 */
+	public int getNextItemID()
+	{
+		int next = -1;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+	        stmt = conn.createStatement();
+	        rs = stmt.executeQuery("SELECT MAX(ItemID) FROM Inventory");
+	        rs.first();
+	        next = rs.getInt(1);
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		
+		return next + 1;
 	}
 }
 	
