@@ -104,6 +104,10 @@ public class Item
 	 * 
 	 * @param newName - new name for the Item
 	 */
+	 public void setNewName(String newName)
+	 {
+		 this.newName = newName;
+	 }
 	
 	
 	/**
@@ -111,6 +115,10 @@ public class Item
 	 * 
 	 * @param newDescription - new description for the Item
 	 */
+	  public void setNewDescription( String newDescription)
+	 {
+		 this.newDescription = newDescription;
+	 }
 	
 	
 	/**
@@ -118,6 +126,10 @@ public class Item
 	 * 
 	 * @param newAvailable - new available count for the Item
 	 */
+	 public void setNewAvailable( String newAvailable)
+	 {
+		 this.newAvailable = newAvailable;
+	 }
 	
 	
 	/**
@@ -125,6 +137,10 @@ public class Item
 	 * 
 	 * @param newPicked - new picked count for the Item
 	 */
+	  public void setNewPicked( String newPicked)
+	 {
+		 this.newPicked = newPicked;
+	 }
 	
 	
 	/**
@@ -132,6 +148,10 @@ public class Item
 	 * 
 	 * @param newLoc - new location for the Item
 	 */
+	  public void setNewLoc( String newLoc)
+	 {
+		 this.newLoc = newLoc;
+	 }
 	
 	
 }
