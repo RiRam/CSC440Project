@@ -34,17 +34,16 @@ public class Order
     //Adds an order to the database.
     //Is meant to be used by the orderScreen so that a user can input info.
     //Returns the orderID of the newly-created order.
-    
     public int addOrder(String tempStoreID, String tempComment){
-    	int newID = orderDB.getNextOrderID();
-            orderDB.addOrder(newID, tempStoreID, tempComment);
-            return newID;
-            //Do error handling in later versions
-        }
+ 	int newID = orderDB.getNextOrderID()+1;
+        orderDB.addOrder(newID, tempStoreID, tempComment);
+        return newID;
+        //Do error handling in later versions
+    }
     
     //getOrder method
-    //Returns the order.
-    public Order getOrder(){
-        return this;
+    //Returns an order that matches the ID
+    public Order getOrder(int tempID){
+        return orderDB.getOrder(tempID);
     }
 }
