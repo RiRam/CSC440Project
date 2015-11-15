@@ -10,29 +10,29 @@ import java.util.*;
 public class OrdersScreen {
 
 	public static void main(String[] args) {
-		start(); 
-		addOrder();
-	}
-	
-	public static void start() {
 		Scanner keyb = new Scanner(System.in);
-		String ans;
+		int input;
 		
-		System.out.println("Would you like to create a new order?");
-        ans = keyb.nextLine();
+		System.out.println("Welcome to the Order Screen Interface. ");
 		
-		if(ans.equalsIgnoreCase("yes")){
-			System.out.println("Ok, starting order making process.");
-		}
-		else if(ans.equalsIgnoreCase("no")){
-			System.out.println("Ok, closing program.");
-			System.exit(0);
-		}
-		else {
-			System.out.println("Invaild entry. Please try again.");
-			System.exit(0);
-		}
-    }
+		do {
+			System.out.println("Enter a command to continue:\n"
+				+ " 1: Enter a New Order\n"
+				+ " 2: Look Up an Existing Order\n"
+				+ " 3: Exit\n");
+			input = keyb.nextInt();
+			
+			if (input == 1) {
+				addOrder();
+			} 
+			
+			else if (input == 2) {
+				searchOrder();
+				System.out.println("Sorry this feature is unavailable at this time.");
+			} 
+			} while (input != 3);
+			System.out.println("Thank you for using the program.");
+	}
 	
 	public static void addOrder() {
 		Scanner keyb = new Scanner(System.in); 
@@ -56,5 +56,24 @@ public class OrdersScreen {
 		System.out.println("Store Id: " + storeId);
 		System.out.println("Comment: " + message);
     }
+	
+	public static void searchOrder(){
+		/*Scanner keyb = new Scanner(System.in); 
+		String storeId = "";
+		String message = "";
+		int orderId;
+		
+		System.out.println("Enter the Order Id: ");
+		orderId = keyb.nextInt();
+		
+		Order storeN = new Order (orderId, storeId, message);
+		
+		orderId = storeN.getOrder(orderId);
+		
+		System.out.println("Entered information:");
+		System.out.println("Order Id: " + orderId);
+		System.out.println("Store Id: " + storeId);
+		System.out.println("Comment: " + message);*/
+	}
 
 }
