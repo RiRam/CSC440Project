@@ -106,7 +106,7 @@ public class Item
 	 */
 	 public void setNewName(String newName)
 	 {
-		 this.newName = newName;
+		 this.name = newName;
 	 }
 	
 	
@@ -117,7 +117,7 @@ public class Item
 	 */
 	  public void setNewDescription( String newDescription)
 	 {
-		 this.newDescription = newDescription;
+		 this.description = newDescription;
 	 }
 	
 	
@@ -126,9 +126,9 @@ public class Item
 	 * 
 	 * @param newAvailable - new available count for the Item
 	 */
-	 public void setNewAvailable( String newAvailable)
+	 public void setNewAvailable(int newAvailable)
 	 {
-		 this.newAvailable = newAvailable;
+		 this.availableCount = newAvailable;
 	 }
 	
 	
@@ -137,9 +137,9 @@ public class Item
 	 * 
 	 * @param newPicked - new picked count for the Item
 	 */
-	  public void setNewPicked( String newPicked)
+	  public void setNewPicked(int newPicked)
 	 {
-		 this.newPicked = newPicked;
+		 this.pickedCount = newPicked;
 	 }
 	
 	
@@ -150,7 +150,7 @@ public class Item
 	 */
 	  public void setNewLoc( String newLoc)
 	 {
-		 this.newLoc = newLoc;
+		 this.location = newLoc;
 	 }
 	
 	
