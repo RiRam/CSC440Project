@@ -144,6 +144,7 @@ public class Orders {
 	}
 	
 	/**
+	 * Get an Order from the Orders table by a given ID number
 	 * 
 	 * @param ID - Order ID
 	 * @return Order - Order
@@ -156,6 +157,7 @@ public class Orders {
 		try {
 	        stmt = conn.createStatement();
 	        rs = stmt.executeQuery("SELECT * FROM Orders WHERE ItemID=" + ID);
+	        rs.first();
 			
 	        o = new Order(rs.getInt(1), rs.getString(2), rs.getString(3));
 			
