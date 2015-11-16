@@ -1,6 +1,7 @@
 import java.applet.Applet;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 /**
  * InventoryScreen class
  * 
@@ -11,6 +12,9 @@ public class InventoryScreen {
 	Inventory inv = new Inventory();
 	String output = "";
 
+	/*
+	 * Main Method to run the project
+	 */
 	public static void main(String[] args) 
 	{
 		InventoryScreen InSc = new InventoryScreen();
@@ -18,6 +22,10 @@ public class InventoryScreen {
 		run(InSc);
 	}
 
+	/*
+	 * Runs the display for the inventory interface
+	 * @param IvScreen - Takes in an InventoryScreen Object
+	 */
 	public static void run(InventoryScreen IvScreen) {
 		Scanner scan = new Scanner(System.in);
 		int input = 0;
@@ -42,14 +50,19 @@ public class InventoryScreen {
 		} while (input != 4);
 		System.out.println("Thank you for using the program.");
 	}
-	
-	public void createItem(String itemInfo) {
-		// Parse information
-		// Send to itemInfoClass
-		// Call displayItemList to display the new page
-		displayItemList();
-	}
-	
+	/*
+	 * Create an item
+	 * @param itemInfo - item description
+	 */
+//	public void createItem(String itemInfo) {
+//		// Parse information
+//		// Send to itemInfoClass
+//		// Call displayItemList to display the new page
+//		displayItemList();
+//	}
+	/*
+	 * Allows user to edit an item
+	 */
 	public void displayEditItem() {
 ///		Inventory inv = new Inventory();
 		Scanner scan = new Scanner (System.in);
@@ -64,7 +77,7 @@ public class InventoryScreen {
 		Scanner de = new Scanner (System.in);
 		String decision = de.nextLine();
 		
-		if (decision.equals("Y")) {
+		if (decision.equalsIgnoreCase("Y") || decision.equalsIgnoreCase("Yes")) {
 			Scanner io = new Scanner (System.in);
 			Scanner io_val = new Scanner (System.in);
 			System.out.println("Enter all fields in the order they appear, separated by a new line (Enter). To exclude an "
@@ -77,12 +90,13 @@ public class InventoryScreen {
 			
 			System.out.println("New Availability: ");
 			int newAvail = io.nextInt();
+
+			System.out.println("Amount picked: ");
+			int newPicked = io_val.nextInt();
 			
 			System.out.println("New Location: ");
 			String newLocation = io_val.nextLine();
 			
-			System.out.println("Amount picked: ");
-			int newPicked = io_val.nextInt();
 			
 			//Update information 
 			inv.updateNameByID(currentItemID, newName);
@@ -95,7 +109,7 @@ public class InventoryScreen {
 		}
 	}
 	/*
-	 * Displays a list of item objects
+	 * Displays a list of item objects to the screen
 	 */
 	public void displayItemList() {
 		ArrayList<Item> itemList = new ArrayList<Item>();
@@ -103,8 +117,11 @@ public class InventoryScreen {
 		for (Item i : itemList) {
 			System.out.println("ID: " + i.getItemID() + " Name: " + i.getItemName() + " Description: " + i.getDescription() + "\n" );
 		}
-
 	}
+	/*
+	 * Displays information for a single item
+	 * @param itemIDString - Item ID as a String
+	 */
 	public void displayitem(int itemIDString) {
 		int itemID = itemIDString;//Integer.parseInt(itemIDString);
 		ArrayList<Item> itemList = new ArrayList<Item>();
