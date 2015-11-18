@@ -1,4 +1,3 @@
-import java.applet.Applet;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
