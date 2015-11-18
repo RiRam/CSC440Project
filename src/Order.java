@@ -67,29 +67,38 @@ public class Order
     
     /**
 	 * storeID setter
+	 * Changes the order's info in the database.
 	 * 
 	 * @param storeID - ID of the store the order comes from
 	 */
     public void setStoreID(String newStoreID){
-    	this.storeID = newStoreID;
+    	orderDB = new Orders();
+    	orderDB.getOrder(this.orderID).storeID = newStoreID;
+    	orderDB.close();
     }
     
     /**
-	 * comment getter
+	 * comment setter
+	 * Changes the order's info in the database.
 	 * 
 	 * @param comment - Comment (optional)
 	 */
     public void setComment(String newComment){
-    	this.comment = newComment;
+    	orderDB = new Orders();
+    	orderDB.getOrder(this.orderID).comment = newComment;
+    	orderDB.close();
     }
     
     /**
 	 * orderID setter
+	 * Changes the order's info in the database.
 	 * 
 	 * @param orderID - The order's unique ID number.
 	 */
     public void setOrderID(int newOrderID){
-    	this.orderID = newOrderID;
+    	orderDB = new Orders();
+    	orderDB.getOrder(this.orderID).orderID = newOrderID;
+    	orderDB.close();
     }
     
     //-----------------------------------------//
