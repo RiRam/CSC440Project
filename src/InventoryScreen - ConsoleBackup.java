@@ -127,20 +127,6 @@ public class InventoryScreen {
 		ArrayList<Item> itemList = new ArrayList<Item>();
 		itemList = inv.getAllItems();
 		Item thisItem = itemList.get(itemID - 1);
-		
-		output = "<div id='popup' class='item_popup'>"
-				+"<h1 class='close_button' onClick='removeItem()'> x </h1>" 
-				+"<h1>" + inv.getNameByID(itemID) + "</h1>" 
-				+"<h2>" + inv.getDescriptionByID(itemID) + "</h2>"
-				+"<button type=button onClick='viewEditItem()'> Edit Item </button>"
-	
-				+ "<p> Available " + Item.getAvailableByID(itemID) + "</p>"
-				+ "<p> Picked " + Item.getPickedByID(itemID) + "</p>"
-				+ "<p> Location " + Item.getLocationByID(itemID) + "</p>"			
-				+ "</div>";
-		
-		return output;
-		
-		//System.out.println("ID: " + thisItem.getItemID() + "\nName: " + thisItem.getItemName() + "\nDescription: " + thisItem.getDescription() + "\nItems Available: " + thisItem.getAvailableCount() + "\nLocation: " + thisItem.getLocation() + "\nItems Picked: " + thisItem.getPickedCount());
+		System.out.println("ID: " + thisItem.getItemID() + "\nName: " + thisItem.getItemName() + "\nDescription: " + thisItem.getDescription() + "\nItems Available: " + thisItem.getAvailableCount() + "\nLocation: " + thisItem.getLocation() + "\nItems Picked: " + thisItem.getPickedCount());
 	}
 }
