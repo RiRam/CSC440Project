@@ -26,6 +26,19 @@ public class Order
     }
     
     /**
+	 * Order constructor, including orderID.
+	 * 
+	 * @param ordereID - The order's unique ID
+	 * @param storeID - ID of the store the order comes from
+	 * @param comment - Comment (optional)
+	 */
+    public Order(int orderID, String storeID, String comment){
+    	this.storeID = storeID;
+    	this.orderID = orderID;
+        this.comment = comment;
+    }
+    
+    /**
 	 * Default Order constructor. Takes no parameters.
 	 */
     public Order(){
