@@ -49,7 +49,7 @@ public class OrdersScreen {
 		
 		Order storeN = new Order (orderId, storeId, message);
 		
-		orderId = storeN.addOrder(storeId, message);
+		orderId = storeN.addOrder();
 		
 		System.out.println("Entered information:");
 		System.out.println("Order Id: " + orderId);
