@@ -1,23 +1,42 @@
+//import java.util.ArrayList;
+
 /**
  * PickLine Class
  * 
  * @author Erica Ram
  */
 public class PickLine {
-	Item item = new Item();
-	int quantity;
-	String status;
+	private Item item = new Item();
+	private int quantity;
+	private String status;
+	private static Inventory inv;
+	
+	/*
+	public static void main(String[] args)
+	{
+		Orders ord = new Orders();
+		ArrayList<PickLine> arr = new ArrayList<PickLine>();
+		System.out.println("Generating PickLines...");
+		arr = ord.generatePickLines();
+		for(PickLine p : arr)
+		{
+			System.out.println(p.getItem().getItemName() + " quant: " + p.getQuantity());
+		}
+	}
+	*/
 	
 	/**
 	 * PickLine Constructor
 	 * @param i
 	 * @param quant
 	 */
-	public PickLine(Item i, int quant)
+	public PickLine(int ID, int quant, String s)
 	{
-		item = i;
+		inv = new Inventory();
+		item = inv.getItem(ID);
+		inv.close();
 		quantity = quant;
-		status = "To Be Picked";
+		status = s;
 	}
 	
 	/**
@@ -48,6 +67,11 @@ public class PickLine {
 	public String getStatus()
 	{
 		return status;
+	}
+	
+	public void addToQuantity(int more)
+	{
+		quantity += more;
 	}
 	
 	/**

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.Properties;
+import java.util.ArrayList;
 
 
 /**
@@ -31,8 +32,23 @@ public class Orders {
 	/** The connection to the database */
 	private Connection conn = null;
 	
+	/*
+	public static void main(String[] args)
+	{
+		Orders ord = new Orders();
+		ArrayList<OrderLine> lines = new ArrayList<OrderLine>();
+		lines.add(new OrderLine(2, 4, "To Be Picked"));
+		lines.add(new OrderLine(3, 1, "To Be Picked"));
+		lines.add(new OrderLine(4, 8, "To Be Picked"));
+		lines.add(new OrderLine(2, 2, "To Be Picked"));
+		ord.addOrder(ord.getNextOrderID(), "17", "test comment", "To Be Picked", lines);
+		//ord.deleteOrder(6);
+		ord.close();
+	}
+	*/
+	
 	/**
-	 * Inventory Constructor
+	 * Orders Constructor
 	 */
 	public Orders()
 	{
@@ -96,15 +112,23 @@ public class Orders {
 	 * @param storeID - Store ID
 	 * @param comment - Comment
 	 */
-	public void addOrder(int ID, String storeID, String comment)
+	public void addOrder(int ID, String storeID, String comment, String status, ArrayList<OrderLine> arr)
 	{
 		// Insert the table
 		try {
-		    String insertString = "INSERT INTO Orders(OrderID, StoreID, Comment) VALUES (" 
-		+ ID + ", '" + storeID + "', '" + comment + "');";
+		    String insertString = "INSERT INTO Orders(OrderID, StoreID, Comment, Status) VALUES (" 
+		+ ID + ", '" + storeID + "', '" + comment + "', '" + status + "');";
 		    System.out.println(insertString);
 			this.executeUpdate(conn, insertString);
 			System.out.println("Insert successful");
+			for(OrderLine a : arr)
+			{
+				insertString = "INSERT INTO OrderLines(idOrderLines, OrderID, LineItem, Quantity, Status) VALUES (" 
+						+ this.getNextOrderLineID()  + ", '" + ID + "', '" + a.getLineItemID() + "', '" 
+						+ a.getQuantity() + "', '" + a.getOrderLineStatus() + "');";
+				this.executeUpdate(conn, insertString);
+				System.out.println("Insert successful");
+			}
 	    } catch (SQLException e) {
 			System.out.println("[ERROR: Could not insert to the table.]");
 			e.printStackTrace();
@@ -120,10 +144,16 @@ public class Orders {
 	public void deleteOrder(int ID)
 	{
 		try {
-		    String deleteString = "DELETE FROM Orders WHERE OrderID=" + ID + ";";
+		    String deleteString = "DELETE FROM OrderLines WHERE OrderID=" + ID + ";";
+			System.out.println(deleteString);
+			this.executeUpdate(conn, deleteString);
+			System.out.println("OrderLines delete successful");
+		    
+		    deleteString = "DELETE FROM Orders WHERE OrderID=" + ID + ";";
 		    System.out.println(deleteString);
 			this.executeUpdate(conn, deleteString);
 			System.out.println("Delete successful");
+			
 	    } catch (SQLException e) {
 			System.out.println("[ERROR: Could not delete to the table]");
 			e.printStackTrace();
@@ -159,7 +189,7 @@ public class Orders {
 	        rs = stmt.executeQuery("SELECT * FROM Orders WHERE OrderID=" + ID);
 	        rs.first();
 			
-	        o = new Order(rs.getInt(1), rs.getString(2), rs.getString(3));
+	        o = new Order(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), this.getOrderLines(rs.getInt(1)));
 			
 		} catch (Exception exc) {
 			exc.printStackTrace();
@@ -188,6 +218,94 @@ public class Orders {
 		}
 		
 		return next + 1;
+	}
+	
+	/**
+	 * Returns the next OrderLine ID
+	 * 
+	 * @return int - next OrderLine ID (i.e. if the current highest OrderLine ID is 3, returns 4)
+	 */
+	public int getNextOrderLineID()
+	{
+		int next = -1;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+	        stmt = conn.createStatement();
+	        rs = stmt.executeQuery("SELECT MAX(idOrderLines) FROM OrderLines");
+	        rs.first();
+	        next = rs.getInt(1);
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		
+		return next + 1;
+	}
+	
+	/**
+	 * Returns ArrayList of Order Lines 
+	 * 
+	 * @param ID
+	 * @return ArrayList<OrderLine>
+	 */
+	public ArrayList<OrderLine> getOrderLines(int ID)
+	{
+		ArrayList<OrderLine> arr = new ArrayList<OrderLine>();
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+	        stmt = conn.createStatement();
+	        rs = stmt.executeQuery("SELECT * FROM OrderLines WHERE OrderID=" + ID);
+	        rs.first();
+			
+	        arr.add(new OrderLine(rs.getInt(3), rs.getInt(4), rs.getString(5)));
+			
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		
+		return arr;
+	}
+	
+	/**
+	 * Generate PickLines
+	 * 
+	 * @return ArrayList<PickLine>
+	 */
+	public ArrayList<PickLine> generatePickLines()
+	{
+		ArrayList<PickLine> arr = new ArrayList<PickLine>();
+		boolean alreadyInArr = false;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+	        stmt = conn.createStatement();
+	        rs = stmt.executeQuery("SELECT * FROM OrderLines");
+	        rs.first();
+    		while(!rs.isAfterLast())
+			{
+    			for(int i = 0; i < arr.size(); i++)
+    			{
+    				if(arr.get(i).getItem().getItemID() == rs.getInt(3))
+    				{
+    					arr.get(i).addToQuantity(rs.getInt(3));
+    					alreadyInArr = true;
+    					break;
+    				}
+    			}
+    			if(!alreadyInArr)
+					arr.add(new PickLine(rs.getInt(3), rs.getInt(4), rs.getString(5)));
+    			
+    			alreadyInArr = false;
+				rs.next();
+			}
+	
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		
+		return arr;
+		
 	}
 }
 	

@@ -32,9 +32,7 @@ public class Inventory {
 	/** The connection to the database */
 	private static Connection conn = null;
 	
-	/**
-	 * Driver of stuffs
-	 */
+	/*
 	public static void main(String[] args) 
 	{
 		Inventory inv = new Inventory();
@@ -49,6 +47,7 @@ public class Inventory {
 				+ inv.getAvailableByID(1) + "\nPicked: " + inv.getPickedByID(1) + "\nLocation: " + inv.getLocationByID(1));;
 		inv.close();
 	}
+	*/
 	
 	/**
 	 * Inventory Constructor
@@ -509,5 +508,7 @@ public class Inventory {
 		
 		return next + 1;
 	}
+	
+	
 }
 	
