@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * The Order class for the IKEA warehouse program.
@@ -6,10 +7,12 @@
  * @author Glenn Gibbons
  * @version 11-18-15
  */
-public class Order
-{
-    private String storeID, comment;
+public class Order{
+	
+    private String storeID, comment, orderStatus;
+    	//Status can be: "To be picked", "Picking" or "Picked"
     private int orderID;
+    private ArrayList<OrderLine> orderLineList;
 	private Orders orderDB;
 
 	/**
@@ -23,19 +26,25 @@ public class Order
     	this.storeID = storeID;
     	this.orderID = 0;
         this.comment = comment;
+        this.orderStatus = "To be picked";
+        this.orderLineList = new ArrayList<OrderLine>();
     }
     
     /**
-	 * Order constructor, including orderID.
+	 * Order constructor, including all parameters.
 	 * 
-	 * @param ordereID - The order's unique ID
+	 * @param orderID - The order's unique ID
 	 * @param storeID - ID of the store the order comes from
 	 * @param comment - Comment (optional)
+	 * @param orderStatus - Picked/Not picked status of order
+	 * @param orderLineList - An arraylist of order lines contained in this order
 	 */
-    public Order(int orderID, String storeID, String comment){
+    public Order(int orderID, String storeID, String comment, String orderStatus, ArrayList<OrderLine> orderLineList){
     	this.storeID = storeID;
     	this.orderID = orderID;
         this.comment = comment;
+        this.orderStatus = orderStatus;
+        this.orderLineList = orderLineList;
     }
     
     /**
@@ -45,6 +54,8 @@ public class Order
     	storeID = "";
         orderID = 0;
         comment = "";
+        orderStatus = "";
+        this.orderLineList = new ArrayList<OrderLine>();
     }
 
     //-----------------------------------------//
@@ -79,40 +90,68 @@ public class Order
     }
     
     /**
+	 * orderStatus getter
+	 * 
+	 * @return orderStatus - The order's picked/not picked status.
+	 */
+    public String getOrderStatus(){
+    	return this.orderStatus;
+    }
+    
+    /**
+	 * orderLineList getter
+	 * 
+	 * @return orderLineList - An arraylist of order lines contained in this order
+	 */
+    public ArrayList<OrderLine> getOrderLineList(){
+    	return this.orderLineList;
+    }
+    
+    /**
 	 * storeID setter
-	 * Changes the order's info in the database.
 	 * 
 	 * @param storeID - ID of the store the order comes from
 	 */
     public void setStoreID(String newStoreID){
-    	orderDB = new Orders();
-    	orderDB.getOrder(this.orderID).storeID = newStoreID;
-    	orderDB.close();
+    	this.storeID = newStoreID;
     }
     
     /**
-	 * comment setter
-	 * Changes the order's info in the database.
+	 * comment getter
 	 * 
 	 * @param comment - Comment (optional)
 	 */
     public void setComment(String newComment){
-    	orderDB = new Orders();
-    	orderDB.getOrder(this.orderID).comment = newComment;
-    	orderDB.close();
+    	this.comment = newComment;
     }
     
     /**
 	 * orderID setter
-	 * Changes the order's info in the database.
 	 * 
 	 * @param orderID - The order's unique ID number.
 	 */
     public void setOrderID(int newOrderID){
-    	orderDB = new Orders();
-    	orderDB.getOrder(this.orderID).orderID = newOrderID;
-    	orderDB.close();
+    	this.orderID = newOrderID;
     }
+    
+    /**
+	 * orderStatus setter
+	 * 
+	 * @param orderStatus - The order's picked/not picked status.
+	 */
+    public void getOrderStatus(String orderStatus){
+    	this.orderStatus = orderStatus;
+    }
+    
+    /**
+	 * orderLineList setter
+	 * 
+	 * @param orderLineList - An arraylist of order lines contained in this order
+	 */
+    public void getOrderLineList(ArrayList<OrderLine> orderLineList){
+    	this.orderLineList = orderLineList;
+    }
+    
     
     //-----------------------------------------//
     //-------------ACTUAL METHODS--------------//
@@ -124,7 +163,11 @@ public class Order
 	 * 
 	 * @return	orderID - The newly-assigned ID of this order
 	 */
-    public int addOrder(){
+    public int addOrder() throws IllegalArgumentException{
+    	//Thrown exception if non-comment fields are blank
+        if(this.storeID.equals("") || this.orderLineList.isEmpty())
+        	throw new IllegalArgumentException("Please do not leave fields blank.");
+        
     	//Open database connection
     	orderDB = new Orders();
     	//Automatically assign next available orderID
@@ -146,8 +189,10 @@ public class Order
 	 * @param searchID - OrderID you are searching for
 	 * 
 	 * @return tempOrder - The order that matches the ID searched for
+	 * 
+	 * @throws IllegalArgumentException if matching order is not found
 	 */
-    public Order searchOrder(int searchID){
+    public Order searchOrder(int searchID) throws IllegalArgumentException{
     	//Open database connection
     	orderDB = new Orders();
     	//Find the order with a matching ID in the database
@@ -155,7 +200,12 @@ public class Order
         
         //Close database connection
         orderDB.close();
-        
+ 
+        //Check the order returned. If it has all empty fields, then the ID
+        //	searched for was not in the database.
+        if(tempOrder.orderID == 0)
+        	throw new IllegalArgumentException("orderID" + searchID + " not found");
+        	
         //Return the order grabbed from the database
         return tempOrder;
     }
