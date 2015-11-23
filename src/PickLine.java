@@ -1,4 +1,4 @@
-//import java.util.ArrayList;
+import java.util.ArrayList;
 
 /**
  * PickLine Class
@@ -11,7 +11,7 @@ public class PickLine {
 	private String status;
 	private static Inventory inv;
 	
-	/*
+	
 	public static void main(String[] args)
 	{
 		Orders ord = new Orders();
@@ -23,7 +23,7 @@ public class PickLine {
 			System.out.println(p.getItem().getItemName() + " quant: " + p.getQuantity());
 		}
 	}
-	*/
+	
 	
 	/**
 	 * PickLine Constructor
@@ -80,6 +80,14 @@ public class PickLine {
 	public void setStatusToBePicked()
 	{
 		status = "To Be Picked";
+	}
+	
+	/**
+	 * Update status to be "Picking"
+	 */
+	public void setStatusPicking()
+	{
+		status = "Picking";
 	}
 	
 	/**

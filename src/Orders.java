@@ -32,7 +32,7 @@ public class Orders {
 	/** The connection to the database */
 	private Connection conn = null;
 	
-	/*
+
 	public static void main(String[] args)
 	{
 		Orders ord = new Orders();
@@ -45,7 +45,7 @@ public class Orders {
 		//ord.deleteOrder(6);
 		ord.close();
 	}
-	*/
+	
 	
 	/**
 	 * Orders Constructor
@@ -156,6 +156,86 @@ public class Orders {
 			
 	    } catch (SQLException e) {
 			System.out.println("[ERROR: Could not delete to the table]");
+			e.printStackTrace();
+			return;
+		}
+	}
+	
+	/**
+	 * Update the StoreID of an Order by a given ID number
+	 * 
+	 * @param ID - Order ID
+	 * @param newStoreID - new Store ID to assign to Order
+	 */
+	public void updateStoreIDByID(int ID, String newStoreID)
+	{
+		try {
+		    String newStoreIDString = "UPDATE Orders SET StoreID='" + newStoreID + "' WHERE OrderID=" + ID + ";";
+		    System.out.println(newStoreIDString);
+			this.executeUpdate(conn, newStoreIDString);
+			System.out.println("Update Store ID successful");
+	    } catch (SQLException e) {
+			System.out.println("[ERROR: Could not update Store ID.]");
+			e.printStackTrace();
+			return;
+		}
+	}
+	
+	/**
+	 * Update the Comment of an Order by a given ID number
+	 * 
+	 * @param ID - Order ID
+	 * @param newComment - new Comment to assign to Order
+	 */
+	public void updateCommentByID(int ID, String newComment)
+	{
+		try {
+		    String newCommentString = "UPDATE Orders SET Comment='" + newComment + "' WHERE OrderID=" + ID + ";";
+		    System.out.println(newCommentString);
+			this.executeUpdate(conn, newCommentString);
+			System.out.println("Update Comment successful");
+	    } catch (SQLException e) {
+			System.out.println("[ERROR: Could not update Comment.]");
+			e.printStackTrace();
+			return;
+		}
+	}
+	
+	/**
+	 * Update the Status of an Order by a given ID number
+	 * 
+	 * @param ID - Order ID
+	 * @param newStatus - new Comment to assign to Order
+	 */
+	public void updateStatusByID(int ID, String newStatus)
+	{
+		try {
+		    String newStatusString = "UPDATE Orders SET Status='" + newStatus + "' WHERE OrderID=" + ID + ";";
+		    System.out.println(newStatusString);
+			this.executeUpdate(conn, newStatusString);
+			System.out.println("Update Status successful");
+	    } catch (SQLException e) {
+			System.out.println("[ERROR: Could not update Status.]");
+			e.printStackTrace();
+			return;
+		}
+	}
+	
+	/**
+	 * Update the Status of an OrderLine by a given ID number
+	 * 
+	 * @param ID - OrderLine ID
+	 * @param newStatus - new Comment to assign to Order
+	 */
+	public void updateOrderLineStatusByID(int ID, String newStatus)
+	{
+		try {
+		    String newStatusString = "UPDATE OrderLines SET Status='" + newStatus + "' WHERE idOrderLines=" + ID + ";";
+		    System.out.println(newStatusString);
+			this.executeUpdate(conn, newStatusString);
+			System.out.println("Update Status successful");
+	    } catch (SQLException e) {
+			System.out.println("[ERROR: Could not update Status.]");
 			e.printStackTrace();
 			return;
 		}
@@ -275,6 +355,7 @@ public class Orders {
 	public ArrayList<PickLine> generatePickLines()
 	{
 		ArrayList<PickLine> arr = new ArrayList<PickLine>();
+		ArrayList<Integer> picking = new ArrayList<Integer>();
 		boolean alreadyInArr = false;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -296,9 +377,15 @@ public class Orders {
     			if(!alreadyInArr)
 					arr.add(new PickLine(rs.getInt(3), rs.getInt(4), rs.getString(5)));
     			
+    			picking.add(rs.getInt(1));
     			alreadyInArr = false;
 				rs.next();
 			}
+    		for(Integer i : picking)
+    		{
+    			this.updateOrderLineStatusByID(i, "Picking");
+    			System.out.println("Setting " + i + "to picking");
+    		}
 	
 		} catch (Exception exc) {
 			exc.printStackTrace();
