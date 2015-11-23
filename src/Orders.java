@@ -156,7 +156,7 @@ public class Orders {
 		ResultSet rs = null;
 		try {
 	        stmt = conn.createStatement();
-	        rs = stmt.executeQuery("SELECT * FROM Orders WHERE ItemID=" + ID);
+	        rs = stmt.executeQuery("SELECT * FROM Orders WHERE OrderID=" + ID);
 	        rs.first();
 			
 	        o = new Order(rs.getInt(1), rs.getString(2), rs.getString(3));
