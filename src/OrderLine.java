@@ -7,19 +7,21 @@
  */
 public class OrderLine {
 	
-	private Item lineItem;
-	private int quantity;
+	private int lineItemID, quantity;
+	private String orderLineStatus;
 	
 	/*
-	 * OrderLine constructor. An OrderLine consists of a single item and
-	 * 	a quantity.
+	 * OrderLine constructor. An OrderLine consists of a single item, represented by
+	 *  its ID, and	a quantity.
 	 * 
-	 * @param lineItem - The item being ordered
+	 * @param lineItemID - The itemID of the item being ordered
 	 * @param quantity - The quantity of the item being ordered
+	 * @param orderLineStatus - The To Be Picked/Picking/Picked status
 	 */
-	public OrderLine(Item lineItem, int quantity){
-		this.lineItem = lineItem;
+	public OrderLine(int lineItemID, int quantity, String orderLineStatus){
+		this.lineItemID = lineItemID;
 		this.quantity = quantity;
+		this.orderLineStatus = orderLineStatus;
 	}
 	
 	/*
@@ -36,10 +38,10 @@ public class OrderLine {
 	/*
 	 * lineItem getter
 	 *
-	 * @return lineItem - The item being ordered
+	 * @return lineItemID - The itemID of the item being ordered
 	 */
-	public Item getLineItem(){
-		return this.lineItem;
+	public int getLineItemID(){
+		return this.lineItemID;
 	}
 	
 	/*
@@ -52,11 +54,20 @@ public class OrderLine {
 	}
 	
 	/*
-	 * lineItem setter
-	 * @param lineItem - The item being ordered
+	 * orderLineStatus getter
+	 * 
+	 * @return orderLineStatus - The To Be Picked/Picking/Picked status
 	 */
-	public void setLineItem(Item lineItem){
-		this.lineItem = lineItem;
+	public String getOrderLineStatus(){
+		return this.orderLineStatus;
+	}
+	
+	/*
+	 * lineItemID setter
+	 * @param lineItemID - The itemID of the item being ordered
+	 */
+	public void setLineItemID(int lineItemID){
+		this.lineItemID = lineItemID;
 	}
 	
 	/*
@@ -65,5 +76,14 @@ public class OrderLine {
 	 */
 	public void setQuantity(int quantity){
 		this.quantity = quantity;
+	}
+	
+	/*
+	 * orderLineStatus setter
+	 * 
+	 * @param orderLineStatus - The To Be Picked/Picking/Picked status
+	 */
+	public void setOrderLineStatus(String orderLineStatus){
+		this.orderLineStatus = orderLineStatus;
 	}
 }
