@@ -32,7 +32,7 @@ public class Orders {
 	/** The connection to the database */
 	private Connection conn = null;
 	
-
+	/*
 	public static void main(String[] args)
 	{
 		Orders ord = new Orders();
@@ -45,6 +45,7 @@ public class Orders {
 		//ord.deleteOrder(6);
 		ord.close();
 	}
+	*/
 	
 	
 	/**
@@ -79,7 +80,9 @@ public class Orders {
 	 * @throws SQLException if unsuccessful
 	 */
 	public boolean executeUpdate(Connection conn, String command) throws SQLException {
-	    Statement stmt = null;
+	    if(command.contains(";") || command.contains("DROP TABLE"))
+	    	throw new SQLException();
+		Statement stmt = null;
 	    try {
 	        stmt = conn.createStatement();
 	        stmt.executeUpdate(command); 

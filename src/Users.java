@@ -13,7 +13,7 @@ public class Users {
 	private final String password = "csc440";
 
 	/** The name of the computer running the database on it */
-	private final String serverName = "52.34.39.213";
+	private final String serverName = "localhost";
 
 	/** The port of the MySQL server (default is 3306) */
 	private final int portNumber = 3306;
@@ -68,6 +68,8 @@ public class Users {
 	 * @throws SQLException if unsuccessful
 	 */
 	public boolean executeUpdate(Connection conn, String command) throws SQLException {
+		if(command.contains(";") || command.contains("DROP TABLE"))
+	    	throw new SQLException();
 	    Statement stmt = null;
 	    try {
 	        stmt = conn.createStatement();
