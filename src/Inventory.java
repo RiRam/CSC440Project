@@ -7,6 +7,7 @@ import java.util.Properties;
 import java.util.ArrayList;
 
 
+
 /**
  * Inventory class
  * 
@@ -21,7 +22,7 @@ public class Inventory {
 	private final String password = "csc440";
 
 	/** The name of the computer running the database on it */
-	private final String serverName = "localhost";
+	private final String serverName = "ec2-52-34-39-213.us-west-2.compute.amazonaws.com";
 
 	/** The port of the MySQL server (default is 3306) */
 	private final int portNumber = 3306;
@@ -32,7 +33,7 @@ public class Inventory {
 	/** The connection to the database */
 	private static Connection conn = null;
 	
-	/*
+
 	public static void main(String[] args) 
 	{
 		Inventory inv = new Inventory();
@@ -42,12 +43,12 @@ public class Inventory {
 		inv.updateAvailableByID(6, 11);
 		inv.updatePickedByID(6, 4);
 		inv.updateLocationByID(6, "Z");
-		inv.deleteItem(6);
+		//inv.deleteItem(6);
 		System.out.println("Item #1: " + inv.getNameByID(1) + "\nDescription: " + inv.getDescriptionByID(1) + "\nAvailable: " 
 				+ inv.getAvailableByID(1) + "\nPicked: " + inv.getPickedByID(1) + "\nLocation: " + inv.getLocationByID(1));;
 		inv.close();
 	}
-	*/
+
 	
 	/**
 	 * Inventory Constructor

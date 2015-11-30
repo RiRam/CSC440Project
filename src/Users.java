@@ -13,7 +13,7 @@ public class Users {
 	private final String password = "csc440";
 
 	/** The name of the computer running the database on it */
-	private final String serverName = "localhost";
+	private final String serverName = "52.34.39.213";
 
 	/** The port of the MySQL server (default is 3306) */
 	private final int portNumber = 3306;
