@@ -1,4 +1,4 @@
-import java.applet.Applet;
+//import java.applet.Applet;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,37 +17,44 @@ public class InventoryScreen {
 	 */
 	public static void main(String[] args) 
 	{
+		
 		InventoryScreen InSc = new InventoryScreen();
-		System.out.println("");
+		//		System.out.println("");
+		InSc.test();
 		run(InSc);
+		
 	}
-
+	public void test() {
+		inv.addItem(6, "Bench", "Green Bench", 20, 0, "B");
+	}
 	/*
 	 * Runs the display for the inventory interface
 	 * @param IvScreen - Takes in an InventoryScreen Object
 	 */
 	public static void run(InventoryScreen IvScreen) {
+		
 		Scanner scan = new Scanner(System.in);
 		int input = 0;
 		System.out.println("Welcome to the Inventory Screen Interface. ");
 		do {
-		System.out.println("Enter a command to continue:\n"
-			+ " 1: View Inventory Items\n"
-			+ " 2: View Item\n"
-			+ " 3: Edit Item\n"
-			+ " 4: Exit\n");
-		input = scan.nextInt();
+			
+			System.out.println("Enter a command to continue:\n"
+					+ " 1: View Inventory Items\n"
+					+ " 2: View Item\n"
+					+ " 3: Edit Item\n"
+					+ " 4: Add Item\n"
+					+ " 5: Exit\n");
+			input = scan.nextInt();
 		
-		if (input == 1) {
-			IvScreen.displayItemList();
-		} else if (input == 2) {
-			int inputItem;
-			System.out.println("Enter the ID of the item you would like to view: ");
-			inputItem = scan.nextInt();
-			IvScreen.displayitem(inputItem);
-		} else if (input == 3)
-			IvScreen.displayEditItem();
-		} while (input != 4);
+			if (input == 1) {
+				IvScreen.displayItemList();
+			} else if (input == 2) {
+				IvScreen.displayitem();
+			} else if (input == 3) {
+				IvScreen.displayEditItem();
+			} else if (input == 4) 
+				IvScreen.addItem();
+		} while (input != 5);
 		System.out.println("Thank you for using the program.");
 	}
 	/*
@@ -68,9 +75,9 @@ public class InventoryScreen {
 		Scanner scan = new Scanner (System.in);
 		System.out.println("Enter the ID of the item you would like to edit: ");
 		int inputItem = scan.nextInt();
-		ArrayList<Item> itemList = new ArrayList<Item>();
-		itemList = inv.getAllItems();
-		Item currentItem = itemList.get(inputItem - 1);
+//		ArrayList<Item> itemList = new ArrayList<Item>();
+//		itemList = inv.getAllItems();
+		Item currentItem = inv.getItem(inputItem);//itemList.get(inputItem - 1);
 		int currentItemID = currentItem.getItemID();
 		System.out.println("Name: " + currentItem.getItemName() + "\nDescription: " + currentItem.getDescription() + "\nItems Available: " + currentItem.getAvailableCount() + "\nLocation: " + currentItem.getLocation() + "\nItems Picked: " + currentItem.getPickedCount());
 		System.out.println("Are you sure you would like to make changes to this item? (Y/N)");
@@ -122,11 +129,48 @@ public class InventoryScreen {
 	 * Displays information for a single item
 	 * @param itemIDString - Item ID as a String
 	 */
-	public void displayitem(int itemIDString) {
-		int itemID = itemIDString;//Integer.parseInt(itemIDString);
-		ArrayList<Item> itemList = new ArrayList<Item>();
-		itemList = inv.getAllItems();
-		Item thisItem = itemList.get(itemID - 1);
-		System.out.println("ID: " + thisItem.getItemID() + "\nName: " + thisItem.getItemName() + "\nDescription: " + thisItem.getDescription() + "\nItems Available: " + thisItem.getAvailableCount() + "\nLocation: " + thisItem.getLocation() + "\nItems Picked: " + thisItem.getPickedCount());
+	public void displayitem() { 
+		Scanner scan = new Scanner (System.in);
+		int inputItem;
+		System.out.println("Enter the ID of the item you would like to view: ");
+		inputItem = scan.nextInt();
+		Item thisItem = inv.getItem(inputItem);
+		System.out.println(thisItem);
+		
+		if (thisItem.getItemID() == -1) {
+			System.out.println("\nInvalid ID number entered.\n");
+		} else {
+			System.out.println("ID: " + thisItem.getItemID() + "\nName: " + thisItem.getItemName() + "\nDescription: " + thisItem.getDescription() + "\nItems Available: " + thisItem.getAvailableCount() + "\nLocation: " + thisItem.getLocation() + "\nItems Picked: " + thisItem.getPickedCount());
+		}
+	}
+	/**
+	 * Adds a new item to the system 
+	 * @param None
+	 */
+	public void addItem() { 
+		// String name, String description, int available, int picked, String loc
+		Scanner scan = new Scanner (System.in);
+		System.out.println("You are about to add a new item. Are you sure that you would like to continue? (Yes/No)");
+		String userInput = scan.nextLine();
+		if (userInput.equalsIgnoreCase("Y") || userInput.equalsIgnoreCase("Yes")) {
+			Scanner input = new Scanner (System.in);
+			
+			System.out.println("Enter Name: ");
+			String newName = input.nextLine();
+			
+			System.out.println("Enter Description: ");
+			String newDescription = input.nextLine();
+			
+			System.out.println("Enter Availability: ");
+			int newAvail = input.nextInt();
+			
+			int newID = inv.getNextItemID();
+			inv.addItem(newID, newName, newDescription, newAvail, 0, "A");
+			if (inv.getNameByID(newID) != "") {
+				System.out.println("Item created sucessfully.");
+			}
+		} else {
+			System.out.println("Returning to the main menu\n");
+		}
 	}
 }
