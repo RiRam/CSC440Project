@@ -7,6 +7,7 @@ import java.util.Properties;
 import java.util.ArrayList;
 
 
+
 /**
  * Inventory class
  * 
@@ -32,9 +33,7 @@ public class Inventory {
 	/** The connection to the database */
 	private static Connection conn = null;
 	
-	/**
-	 * Driver of stuffs
-	 */
+	/*
 	public static void main(String[] args) 
 	{
 		Inventory inv = new Inventory();
@@ -44,11 +43,13 @@ public class Inventory {
 		inv.updateAvailableByID(6, 11);
 		inv.updatePickedByID(6, 4);
 		inv.updateLocationByID(6, "Z");
-		inv.deleteItem(6);
+		//inv.deleteItem(6);
 		System.out.println("Item #1: " + inv.getNameByID(1) + "\nDescription: " + inv.getDescriptionByID(1) + "\nAvailable: " 
 				+ inv.getAvailableByID(1) + "\nPicked: " + inv.getPickedByID(1) + "\nLocation: " + inv.getLocationByID(1));;
 		inv.close();
 	}
+	*/
+
 	
 	/**
 	 * Inventory Constructor
@@ -82,6 +83,8 @@ public class Inventory {
 	 * @throws SQLException if unsuccessful
 	 */
 	public boolean executeUpdate(Connection conn, String command) throws SQLException {
+		if(command.contains(";") || command.contains("DROP TABLE"))
+	    	throw new SQLException();
 	    Statement stmt = null;
 	    try {
 	        stmt = conn.createStatement();
@@ -509,5 +512,7 @@ public class Inventory {
 		
 		return next + 1;
 	}
+	
+	
 }
 	

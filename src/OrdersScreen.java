@@ -28,7 +28,6 @@ public class OrdersScreen {
 			
 			else if (input == 2) {
 				searchOrder();
-				System.out.println("Sorry this feature is unavailable at this time.");
 			} 
 			} while (input != 3);
 			System.out.println("Thank you for using the program.");
@@ -36,7 +35,6 @@ public class OrdersScreen {
 	
 	public static void addOrder() {
 		Scanner keyb = new Scanner(System.in); 
-		//Order storeN;
 		String storeId;
 		String message;
 		int orderId = 0;
@@ -47,7 +45,7 @@ public class OrdersScreen {
 		System.out.println("Enter your comment: ");
 		message = keyb.nextLine();
 		
-		Order storeN = new Order (orderId, storeId, message);
+		Order storeN = new Order(storeId, message);
 		
 		orderId = storeN.addOrder();
 		
@@ -58,7 +56,9 @@ public class OrdersScreen {
     }
 	
 	public static void searchOrder(){
-		/*Scanner keyb = new Scanner(System.in); 
+		Scanner keyb = new Scanner(System.in);
+		Order storeN = new Order();
+		Order storeQ = new Order();
 		String storeId = "";
 		String message = "";
 		int orderId;
@@ -66,14 +66,15 @@ public class OrdersScreen {
 		System.out.println("Enter the Order Id: ");
 		orderId = keyb.nextInt();
 		
-		Order storeN = new Order (orderId, storeId, message);
-		
-		orderId = storeN.getOrder(orderId);
+		storeQ = storeN.searchOrder(orderId);
+		orderId = storeQ.getOrderID();
+		storeId = storeQ.getStoreID();
+		message = storeQ.getComment();
 		
 		System.out.println("Entered information:");
 		System.out.println("Order Id: " + orderId);
 		System.out.println("Store Id: " + storeId);
-		System.out.println("Comment: " + message);*/
+		System.out.println("Comment: " + message);
 	}
 
 }
