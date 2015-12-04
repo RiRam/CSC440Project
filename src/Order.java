@@ -173,7 +173,7 @@ public class Order{
     	//Automatically assign next available orderID
     	this.orderID = orderDB.getNextOrderID();
     	//Add this order to the database
-        orderDB.addOrder(this.orderID, this.storeID, this.comment, this.orderStatus, this.orderLineList);
+        orderDB.addOrder(this.orderID, this.storeID, this.comment);
         
         //Close database connection
         orderDB.close();
