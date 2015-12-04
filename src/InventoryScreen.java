@@ -20,7 +20,7 @@ public class InventoryScreen {
 		
 		InventoryScreen InSc = new InventoryScreen();
 		//		System.out.println("");
-		InSc.test();
+//		InSc.test();
 		run(InSc);
 		
 	}
@@ -71,12 +71,10 @@ public class InventoryScreen {
 	 * Allows user to edit an item
 	 */
 	public void displayEditItem() {
-///		Inventory inv = new Inventory();
 		Scanner scan = new Scanner (System.in);
 		System.out.println("Enter the ID of the item you would like to edit: ");
 		int inputItem = scan.nextInt();
-//		ArrayList<Item> itemList = new ArrayList<Item>();
-//		itemList = inv.getAllItems();
+		
 		Item currentItem = inv.getItem(inputItem);//itemList.get(inputItem - 1);
 		int currentItemID = currentItem.getItemID();
 		System.out.println("Name: " + currentItem.getItemName() + "\nDescription: " + currentItem.getDescription() + "\nItems Available: " + currentItem.getAvailableCount() + "\nLocation: " + currentItem.getLocation() + "\nItems Picked: " + currentItem.getPickedCount());
@@ -87,8 +85,10 @@ public class InventoryScreen {
 		if (decision.equalsIgnoreCase("Y") || decision.equalsIgnoreCase("Yes")) {
 			Scanner io = new Scanner (System.in);
 			Scanner io_val = new Scanner (System.in);
+			
 			System.out.println("Enter all fields in the order they appear, separated by a new line (Enter). To exclude an "
 					+ "item from being edited, place a dash (-) in place of a the new text.");
+			
 			System.out.println("New Name: ");
 			String newName = io.nextLine();
 			
