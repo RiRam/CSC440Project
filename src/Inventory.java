@@ -37,19 +37,18 @@ public class Inventory {
 	public static void main(String[] args) 
 	{
 		Inventory inv = new Inventory();
-		inv.addItem(6, "Orange desk", "An orange desk.", 1, 2, "F");
+		//inv.addItem(6, "Orange desk", "An orange desk.", 1, 2, "F");
 		inv.updateNameByID(6, "Orange computer desk");
 		inv.updateDescriptionByID(6, "An orange computer desk.");
 		inv.updateAvailableByID(6, 11);
 		inv.updatePickedByID(6, 4);
 		inv.updateLocationByID(6, "Z");
-		//inv.deleteItem(6);
+		inv.deleteItem(6);
 		System.out.println("Item #1: " + inv.getNameByID(1) + "\nDescription: " + inv.getDescriptionByID(1) + "\nAvailable: " 
 				+ inv.getAvailableByID(1) + "\nPicked: " + inv.getPickedByID(1) + "\nLocation: " + inv.getLocationByID(1));;
 		inv.close();
 	}
 	*/
-
 	
 	/**
 	 * Inventory Constructor
