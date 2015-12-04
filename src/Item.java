@@ -65,7 +65,8 @@ public class Item
 	 * @return int - Available Count
 	 */
 	public int getAvailableCount()
-	{	return availableCount;	}
+	{	return availableCount;	
+	}
 	
 	/**
 	 * Get Description
