@@ -126,7 +126,7 @@ public class Inventory {
 		// Insert the table
 		try {
 		    String insertString = "INSERT INTO Inventory(ItemID, ItemName, ItemDescription, AvailableCount, PickedCount, Location) VALUES (" 
-		+ ID + ", '" + name + "', '" + description + "', " + available + ", " + picked + ", '" + loc + "');";
+		+ ID + ", '" + name + "', '" + description + "', " + available + ", " + picked + ", '" + loc + "')";
 		    System.out.println(insertString);
 			this.executeUpdate(conn, insertString);
 			System.out.println("Insert successful");
@@ -145,7 +145,7 @@ public class Inventory {
 	public void deleteItem(int ID)
 	{
 		try {
-		    String deleteString = "DELETE FROM Inventory WHERE ItemID=" + ID + ";";
+		    String deleteString = "DELETE FROM Inventory WHERE ItemID=" + ID;
 		    System.out.println(deleteString);
 			this.executeUpdate(conn, deleteString);
 			System.out.println("Delete successful");
@@ -165,7 +165,7 @@ public class Inventory {
 	public void updateNameByID(int ID, String newName)
 	{
 		try {
-		    String newNameString = "UPDATE Inventory SET ItemName='" + newName + "' WHERE ItemID=" + ID + ";";
+		    String newNameString = "UPDATE Inventory SET ItemName='" + newName + "' WHERE ItemID=" + ID;
 		    System.out.println(newNameString);
 			this.executeUpdate(conn, newNameString);
 			System.out.println("Update name successful");
@@ -185,7 +185,7 @@ public class Inventory {
 	public void updateDescriptionByID(int ID, String newDescription)
 	{
 		try {
-		    String newDescriptionString = "UPDATE Inventory SET ItemDescription='" + newDescription + "' WHERE ItemID=" + ID + ";";
+		    String newDescriptionString = "UPDATE Inventory SET ItemDescription='" + newDescription + "' WHERE ItemID=" + ID;
 		    System.out.println(newDescriptionString);
 			this.executeUpdate(conn, newDescriptionString);
 			System.out.println("Update description successful");
@@ -205,7 +205,7 @@ public class Inventory {
 	public void updateAvailableByID(int ID, int newAvailable)
 	{
 		try {
-		    String newAvailableString = "UPDATE Inventory SET AvailableCount=" + newAvailable + " WHERE ItemID=" + ID + ";";
+		    String newAvailableString = "UPDATE Inventory SET AvailableCount=" + newAvailable + " WHERE ItemID=" + ID;
 		    System.out.println(newAvailableString);
 			this.executeUpdate(conn, newAvailableString);
 			System.out.println("Update available successful");
@@ -225,7 +225,7 @@ public class Inventory {
 	public void updatePickedByID(int ID, int newPicked)
 	{
 		try {
-		    String newPickedString = "UPDATE Inventory SET PickedCount=" + newPicked + " WHERE ItemID=" + ID + ";";
+		    String newPickedString = "UPDATE Inventory SET PickedCount=" + newPicked + " WHERE ItemID=" + ID;
 		    System.out.println(newPickedString);
 			this.executeUpdate(conn, newPickedString);
 			System.out.println("Update picked successful");
@@ -245,7 +245,7 @@ public class Inventory {
 	public void updateLocationByID(int ID, String newLoc)
 	{
 		try {
-		    String newLocString = "UPDATE Inventory SET Location='" + newLoc + "' WHERE ItemID=" + ID + ";";
+		    String newLocString = "UPDATE Inventory SET Location='" + newLoc + "' WHERE ItemID=" + ID;
 		    System.out.println(newLocString);
 			this.executeUpdate(conn, newLocString);
 			System.out.println("Update picked successful");

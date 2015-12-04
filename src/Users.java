@@ -108,7 +108,7 @@ public class Users {
 		// Insert the table
 		try {
 		    String insertString = "INSERT INTO Users(idUsers, Username, Password) VALUES (" 
-		+ ID + ", '" + username + "', '" + password + "');";
+		+ ID + ", '" + username + "', '" + password + "')";
 		    System.out.println(insertString);
 			this.executeUpdate(conn, insertString);
 			System.out.println("Insert successful");
@@ -127,7 +127,7 @@ public class Users {
 	public void deleteUser(int ID)
 	{
 		try {
-		    String deleteString = "DELETE FROM Users WHERE idUsers=" + ID + ";";
+		    String deleteString = "DELETE FROM Users WHERE idUsers=" + ID;
 			System.out.println(deleteString);
 			this.executeUpdate(conn, deleteString);
 			System.out.println("Users delete successful");
@@ -142,7 +142,7 @@ public class Users {
 	public void resetPassword(int ID, String newPassword)
 	{
 		try {
-		    String newPasswordString = "UPDATE Users SET Password='" + newPassword + "' WHERE idUsers=" + ID + ";";
+		    String newPasswordString = "UPDATE Users SET Password='" + newPassword + "' WHERE idUsers=" + ID;
 		    System.out.println(newPasswordString);
 			this.executeUpdate(conn, newPasswordString);
 			System.out.println("Update password successful");
