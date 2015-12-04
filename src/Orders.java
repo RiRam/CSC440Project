@@ -120,7 +120,7 @@ public class Orders {
 		// Insert the table
 		try {
 		    String insertString = "INSERT INTO Orders(OrderID, StoreID, Comment, Status) VALUES (" 
-		+ ID + ", '" + storeID + "', '" + comment + "', '" + status + "');";
+		+ ID + ", '" + storeID + "', '" + comment + "', '" + status + "')";
 		    System.out.println(insertString);
 			this.executeUpdate(conn, insertString);
 			System.out.println("Insert successful");
@@ -128,7 +128,7 @@ public class Orders {
 			{
 				insertString = "INSERT INTO OrderLines(idOrderLines, OrderID, LineItem, Quantity, Status) VALUES (" 
 						+ this.getNextOrderLineID()  + ", '" + ID + "', '" + a.getLineItemID() + "', '" 
-						+ a.getQuantity() + "', '" + a.getOrderLineStatus() + "');";
+						+ a.getQuantity() + "', '" + a.getOrderLineStatus() + "')";
 				this.executeUpdate(conn, insertString);
 				System.out.println("Insert successful");
 			}
@@ -147,12 +147,12 @@ public class Orders {
 	public void deleteOrder(int ID)
 	{
 		try {
-		    String deleteString = "DELETE FROM OrderLines WHERE OrderID=" + ID + ";";
+		    String deleteString = "DELETE FROM OrderLines WHERE OrderID=" + ID;
 			System.out.println(deleteString);
 			this.executeUpdate(conn, deleteString);
 			System.out.println("OrderLines delete successful");
 		    
-		    deleteString = "DELETE FROM Orders WHERE OrderID=" + ID + ";";
+		    deleteString = "DELETE FROM Orders WHERE OrderID=" + ID;
 		    System.out.println(deleteString);
 			this.executeUpdate(conn, deleteString);
 			System.out.println("Delete successful");
@@ -173,7 +173,7 @@ public class Orders {
 	public void updateStoreIDByID(int ID, String newStoreID)
 	{
 		try {
-		    String newStoreIDString = "UPDATE Orders SET StoreID='" + newStoreID + "' WHERE OrderID=" + ID + ";";
+		    String newStoreIDString = "UPDATE Orders SET StoreID='" + newStoreID + "' WHERE OrderID=" + ID;
 		    System.out.println(newStoreIDString);
 			this.executeUpdate(conn, newStoreIDString);
 			System.out.println("Update Store ID successful");
@@ -193,7 +193,7 @@ public class Orders {
 	public void updateCommentByID(int ID, String newComment)
 	{
 		try {
-		    String newCommentString = "UPDATE Orders SET Comment='" + newComment + "' WHERE OrderID=" + ID + ";";
+		    String newCommentString = "UPDATE Orders SET Comment='" + newComment + "' WHERE OrderID=" + ID;
 		    System.out.println(newCommentString);
 			this.executeUpdate(conn, newCommentString);
 			System.out.println("Update Comment successful");
@@ -213,7 +213,7 @@ public class Orders {
 	public void updateStatusByID(int ID, String newStatus)
 	{
 		try {
-		    String newStatusString = "UPDATE Orders SET Status='" + newStatus + "' WHERE OrderID=" + ID + ";";
+		    String newStatusString = "UPDATE Orders SET Status='" + newStatus + "' WHERE OrderID=" + ID;
 		    System.out.println(newStatusString);
 			this.executeUpdate(conn, newStatusString);
 			System.out.println("Update Status successful");
@@ -233,7 +233,7 @@ public class Orders {
 	public void updateOrderLineStatusByID(int ID, String newStatus)
 	{
 		try {
-		    String newStatusString = "UPDATE OrderLines SET Status='" + newStatus + "' WHERE idOrderLines=" + ID + ";";
+		    String newStatusString = "UPDATE OrderLines SET Status='" + newStatus + "' WHERE idOrderLines=" + ID;
 		    System.out.println(newStatusString);
 			this.executeUpdate(conn, newStatusString);
 			System.out.println("Update Status successful");
