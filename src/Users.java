@@ -138,6 +138,33 @@ public class Users {
 		}
 	}
 	
+	/**
+	 * Check if a user login is valid 
+	 * 
+	 * @return boolean
+	 */
+	public boolean checkUserCredentials(String username, String password)
+	{
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+	        stmt = conn.createStatement();
+	        rs = stmt.executeQuery("SELECT * FROM Users");
+			rs.first();
+			while(!rs.isAfterLast())
+			{
+				if (rs.getString(2).equals(username) && rs.getString(3).equals(password)) {
+					return true;
+				}
+				rs.next();
+			} 
+			return false;
+			
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+			return false;
+	}
 	
 	public void resetPassword(int ID, String newPassword)
 	{

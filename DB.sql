@@ -49,9 +49,9 @@ CREATE TABLE IF NOT EXISTS `Warehouse`.`Orders` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
-INSERT INTO Orders (OrderID, StoreID, Comment, Status) VALUES (1, 'A1', 'Comment here A.’, ‘Picked’);
-INSERT INTO Orders (OrderID, StoreID, Comment, Status) VALUES (2, 'B1', 'Comment here B.’, ‘Picking’);
-INSERT INTO Orders (OrderID, StoreID, Comment, Status) VALUES (3, 'C1', 'Comment here C.’, ‘To Be Picked’);
+INSERT INTO Orders (OrderID, StoreID, Comment, Status) VALUES (1, 'A1', 'Comment here A.', 'Picked');
+INSERT INTO Orders (OrderID, StoreID, Comment, Status) VALUES (2, 'B1', 'Comment here B.', 'Picking');
+INSERT INTO Orders (OrderID, StoreID, Comment, Status) VALUES (3, 'C1', 'Comment here C.', 'To Be Picked');
 
 
 -- -----------------------------------------------------
