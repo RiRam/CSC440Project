@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.Console;
 
 public class UserScreen {
 	Users Usr = new Users();
@@ -24,12 +25,14 @@ public class UserScreen {
 				+ "3: Exit\n");
 		decision = computeDecision(UsScrn);
 		} while (decision != 3);
-		System.out.println("Thank you for using the program.");
+		UsScrn.exit();
+//		System.out.println("Thank you for using the program.");
 		
 	}
 	private static int computeDecision(UserScreen UsScrn) {
 		Scanner io = new Scanner(System.in);
 		int input = io.nextInt(); 
+		
 		if (input == 1) {
 			UsScrn.Login();
 			return 1;
@@ -37,7 +40,6 @@ public class UserScreen {
 			UsScrn.createAccount();
 			return 2;
 		} else if (input == 3) {
-			UsScrn.exit();
 			return 3;
 		} else {
 			System.out.println("Invalid Option.");
@@ -55,6 +57,7 @@ public class UserScreen {
 		
 			System.out.println("Please enter your password: ");
 			String password = io.nextLine();
+			
 			if (UsSc.credentialsValid(username, password)) {
 				InventoryScreen instance = new InventoryScreen();
 				InventoryScreen.run(instance);
@@ -72,22 +75,38 @@ public class UserScreen {
 	
 	public void createAccount() {
 		// Prompt User to create account
+		String username;
 		Scanner io = new Scanner(System.in);
 		System.out.println("Are you sure that you would like to create a new account? (Y/N)");
 		String decision = io.nextLine();
 		if (decision.equalsIgnoreCase("Y")) {
-			System.out.println("Enter new username");
-			String username = io.nextLine();
 			
-			System.out.println("Enter new password");
-			String password = io.nextLine();
+			do {
+				System.out.println("Enter new username");
+				username = io.nextLine();
 			
+				System.out.println("Enter new password: (Remember to write down your password!)");
+				String password = io.nextLine();
+			
+				if (!Usr.checkUsername(username)) {
+					int userID = Usr.getNextUserID();
+					User newUser = new User(password, userID, username);
+					if (newUser.getUsername(userID) != "") {
+						System.out.println("New User succesfully created.");
+						System.out.println("Username: " + newUser.getUsername(userID));
+						break;
+					}
+				} else {
+					System.out.println("That Username has already been taken. Please try a different username. ");
+					System.out.println("Would you like to try again? (Y/N)");
+					decision = io.nextLine();
+				}
+			} while (decision.equalsIgnoreCase("Y"));
 			
 		}
-		
-		
 	}
 	public void exit() {
-		
+		System.out.println("Thank you for using the program.");
+		System.exit(0);
 	}
 }

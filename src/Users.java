@@ -141,7 +141,7 @@ public class Users {
 	/**
 	 * Check if a user login is valid 
 	 * 
-	 * @return boolean
+	 * @return boolean - Depending on if both credentials were found
 	 */
 	public boolean checkUserCredentials(String username, String password)
 	{
@@ -152,8 +152,36 @@ public class Users {
 	        rs = stmt.executeQuery("SELECT * FROM Users");
 			rs.first();
 			while(!rs.isAfterLast())
+			{				
+				if ((rs.getString(2).equals(username)) && (rs.getString(3).equals(password))) {
+					return true;
+				}
+				rs.next();
+			} 
+			return false;
+			
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+			return false;
+	}
+	
+	/**
+	 * Check if a username is already in the system
+	 * 
+	 * @return boolean - Depending if the username was found 
+	 */
+	public boolean checkUsername(String username)
+	{
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+	        stmt = conn.createStatement();
+	        rs = stmt.executeQuery("SELECT * FROM Users");
+			rs.first();
+			while(!rs.isAfterLast())
 			{
-				if (rs.getString(2).equals(username) && rs.getString(3).equals(password)) {
+				if (rs.getString(2).equals(username)) {
 					return true;
 				}
 				rs.next();

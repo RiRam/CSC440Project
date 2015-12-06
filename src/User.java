@@ -1,6 +1,6 @@
 
 public class User {
-	
+	Users Usr = new Users();
 	private String password;
 	private String username;
 	private int ID;
@@ -11,12 +11,12 @@ public class User {
 		this.username = newUsername;
 		this.ID = newID;
 		
-		Users.addUser (this.ID, this.username,  this.password)
+		Usr.addUser (this.ID, this.username,  this.password);
 	}
 	
-	public void getUsername(int ID)
+	public String getUsername(int ID)
 	{
-		return Users.getUsernameByID(this.ID)
+		return Usr.getUsernameByID(this.ID);
 	}
 	
 	
