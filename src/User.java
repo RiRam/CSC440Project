@@ -11,12 +11,15 @@ public class User {
 		this.username = newUsername;
 		this.ID = newID;
 		
-		Users.addUser (this.ID, this.username,  this.password)
+		Users usr = new Users();
+		
+	usr.addUser (this.ID, this.username,  this.password)
 	}
 	
-	public void getUsername(int ID)
+	public String getUsername(int ID)
 	{
-		return Users.getUsernameByID(this.ID)
+		Users usr1 = new Users();
+		return usr1.getUsernameByID(this.ID)
 	}
 	
 	
