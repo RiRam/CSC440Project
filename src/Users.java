@@ -7,13 +7,13 @@ import java.util.Properties;
 
 public class Users {
 	/** The name of the MySQL account to use */
-	private final String userName = "root";
+	private final String userName = "admin";
 
 	/** The password for the MySQL account */
-	private final String password = "csc440";
+	private final String password = "warehouse";
 
 	/** The name of the computer running the database on it */
-	private final String serverName = "localhost";
+	private final String serverName = "warehouse.cd2f0yi9ywlu.us-west-2.rds.amazonaws.com";
 
 	/** The port of the MySQL server (default is 3306) */
 	private final int portNumber = 3306;
@@ -28,13 +28,14 @@ public class Users {
 	public static void main(String[] args)
 	{
 		Users u = new Users();
-		u.addUser(u.getNextUserID(), "test", "elephants");
-		u.resetPassword(2, "new");
-		u.getUsernameByID(1);
-		u.deleteUser(1);
+		//u.addUser(u.getNextUserID(), "test", "elephants");
+		//u.resetPassword(2, "new");
+		System.out.println(u.getUsernameByID(1));
+		//u.deleteUser(1);
 		u.close();
 	}
 	*/
+	
 	
 	/**
 	 * Orders Constructor
@@ -109,7 +110,7 @@ public class Users {
 		try {
 		    String insertString = "INSERT INTO Users(idUsers, Username, Password) VALUES (" 
 		+ ID + ", '" + username + "', '" + password + "')";
-		    System.out.println(insertString);
+		    //System.out.println(insertString);
 			this.executeUpdate(conn, insertString);
 			System.out.println("Insert successful");
 	    } catch (SQLException e) {
@@ -128,7 +129,7 @@ public class Users {
 	{
 		try {
 		    String deleteString = "DELETE FROM Users WHERE idUsers=" + ID;
-			System.out.println(deleteString);
+			//System.out.println(deleteString);
 			this.executeUpdate(conn, deleteString);
 			System.out.println("Users delete successful");
 	    } catch (SQLException e) {
@@ -198,7 +199,7 @@ public class Users {
 	{
 		try {
 		    String newPasswordString = "UPDATE Users SET Password='" + newPassword + "' WHERE idUsers=" + ID;
-		    System.out.println(newPasswordString);
+		    //System.out.println(newPasswordString);
 			this.executeUpdate(conn, newPasswordString);
 			System.out.println("Update password successful");
 	    } catch (SQLException e) {

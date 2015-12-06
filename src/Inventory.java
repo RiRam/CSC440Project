@@ -16,14 +16,14 @@ import java.util.ArrayList;
 
 public class Inventory {
 	/** The name of the MySQL account to use */
-	private final String userName = "root";
+	private final String userName = "admin";
 
 	/** The password for the MySQL account */
-	private final String password = "csc440";
+	private final String password = "warehouse";
 
 	/** The name of the computer running the database on it */
-	private final String serverName = "localhost";
-
+	private final String serverName = "warehouse.cd2f0yi9ywlu.us-west-2.rds.amazonaws.com";
+	
 	/** The port of the MySQL server (default is 3306) */
 	private final int portNumber = 3306;
 
@@ -126,7 +126,7 @@ public class Inventory {
 		try {
 		    String insertString = "INSERT INTO Inventory(ItemID, ItemName, ItemDescription, AvailableCount, PickedCount, Location) VALUES (" 
 		+ ID + ", '" + name + "', '" + description + "', " + available + ", " + picked + ", '" + loc + "')";
-		    System.out.println(insertString);
+		    //System.out.println(insertString);
 			this.executeUpdate(conn, insertString);
 			System.out.println("Insert successful");
 	    } catch (SQLException e) {
@@ -145,7 +145,7 @@ public class Inventory {
 	{
 		try {
 		    String deleteString = "DELETE FROM Inventory WHERE ItemID=" + ID;
-		    System.out.println(deleteString);
+		    //System.out.println(deleteString);
 			this.executeUpdate(conn, deleteString);
 			System.out.println("Delete successful");
 	    } catch (SQLException e) {
@@ -165,7 +165,7 @@ public class Inventory {
 	{
 		try {
 		    String newNameString = "UPDATE Inventory SET ItemName='" + newName + "' WHERE ItemID=" + ID;
-		    System.out.println(newNameString);
+		    //System.out.println(newNameString);
 			this.executeUpdate(conn, newNameString);
 			System.out.println("Update name successful");
 	    } catch (SQLException e) {
@@ -185,7 +185,7 @@ public class Inventory {
 	{
 		try {
 		    String newDescriptionString = "UPDATE Inventory SET ItemDescription='" + newDescription + "' WHERE ItemID=" + ID;
-		    System.out.println(newDescriptionString);
+		    //System.out.println(newDescriptionString);
 			this.executeUpdate(conn, newDescriptionString);
 			System.out.println("Update description successful");
 	    } catch (SQLException e) {
@@ -205,7 +205,7 @@ public class Inventory {
 	{
 		try {
 		    String newAvailableString = "UPDATE Inventory SET AvailableCount=" + newAvailable + " WHERE ItemID=" + ID;
-		    System.out.println(newAvailableString);
+		    //System.out.println(newAvailableString);
 			this.executeUpdate(conn, newAvailableString);
 			System.out.println("Update available successful");
 	    } catch (SQLException e) {
@@ -225,7 +225,7 @@ public class Inventory {
 	{
 		try {
 		    String newPickedString = "UPDATE Inventory SET PickedCount=" + newPicked + " WHERE ItemID=" + ID;
-		    System.out.println(newPickedString);
+		    //System.out.println(newPickedString);
 			this.executeUpdate(conn, newPickedString);
 			System.out.println("Update picked successful");
 	    } catch (SQLException e) {
@@ -245,7 +245,7 @@ public class Inventory {
 	{
 		try {
 		    String newLocString = "UPDATE Inventory SET Location='" + newLoc + "' WHERE ItemID=" + ID;
-		    System.out.println(newLocString);
+		    //System.out.println(newLocString);
 			this.executeUpdate(conn, newLocString);
 			System.out.println("Update picked successful");
 	    } catch (SQLException e) {
