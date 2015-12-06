@@ -28,9 +28,9 @@ public class Users {
 	public static void main(String[] args)
 	{
 		Users u = new Users();
-		//u.addUser(u.getNextUserID(), "test", "elephants");
+		u.addUser(u.getNextUserID(), "test", "elephants", 2);
 		//u.resetPassword(2, "new");
-		System.out.println(u.getUsernameByID(1));
+		System.out.println(u.getUserTypeByID(1));
 		//u.deleteUser(1);
 		u.close();
 	}
@@ -38,7 +38,7 @@ public class Users {
 	
 	
 	/**
-	 * Orders Constructor
+	 * Users Constructor
 	 */
 	public Users()
 	{
@@ -103,13 +103,14 @@ public class Users {
 	 * @param ID
 	 * @param username
 	 * @param password
+	 * @param type
 	 */
-	public void addUser(int ID, String username, String password)
+	public void addUser(int ID, String username, String password, int type)
 	{
 		// Insert the table
 		try {
-		    String insertString = "INSERT INTO Users(idUsers, Username, Password) VALUES (" 
-		+ ID + ", '" + username + "', '" + password + "')";
+		    String insertString = "INSERT INTO Users(idUsers, Username, Password, UserType) VALUES (" 
+		+ ID + ", '" + username + "', '" + password + "', " + type + ")";
 		    //System.out.println(insertString);
 			this.executeUpdate(conn, insertString);
 			System.out.println("Insert successful");
@@ -195,6 +196,12 @@ public class Users {
 			return false;
 	}
 	
+	/**
+	 * Reset password 
+	 * 
+	 * @param ID
+	 * @param newPassword
+	 */
 	public void resetPassword(int ID, String newPassword)
 	{
 		try {
@@ -204,6 +211,25 @@ public class Users {
 			System.out.println("Update password successful");
 	    } catch (SQLException e) {
 			System.out.println("[ERROR: Could not update password.]");
+			e.printStackTrace();
+			return;
+		}
+	}
+	
+	/**
+	 * Change user type (1 thru 3)
+	 * 
+	 * @param ID
+	 * @param newType
+	 */
+	public void updateUserType(int ID, int newType)
+	{
+		try {
+		    String newTypeString = "UPDATE Users SET UserType='" + newType + "' WHERE idUsers=" + ID;
+			this.executeUpdate(conn, newTypeString);
+			System.out.println("Update user type successful");
+	    } catch (SQLException e) {
+			System.out.println("[ERROR: Could not update user type.]");
 			e.printStackTrace();
 			return;
 		}
@@ -244,6 +270,31 @@ public class Users {
 		}
 		
 		return username;
+	}
+	
+	/**
+	 * Get user type for a given User ID
+	 * 
+	 * @param ID
+	 * @return String
+	 */
+	public int getUserTypeByID(int ID)
+	{
+		int userType = -1;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+	        stmt = conn.createStatement();
+	        rs = stmt.executeQuery("SELECT UserType FROM Users WHERE idUsers=" + ID);
+	        rs.first();
+			
+	        userType = rs.getInt(1);
+			
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		
+		return userType;
 	}
 	
 	/**
