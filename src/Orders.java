@@ -15,13 +15,13 @@ import java.util.ArrayList;
 
 public class Orders {
 	/** The name of the MySQL account to use */
-	private final String userName = "root";
+	private final String userName = "admin";
 
 	/** The password for the MySQL account */
-	private final String password = "csc440";
+	private final String password = "warehouse";
 
 	/** The name of the computer running the database on it */
-	private final String serverName = "localhost";
+	private final String serverName = "warehouse.cd2f0yi9ywlu.us-west-2.rds.amazonaws.com";
 
 	/** The port of the MySQL server (default is 3306) */
 	private final int portNumber = 3306;
@@ -121,7 +121,7 @@ public class Orders {
 		try {
 		    String insertString = "INSERT INTO Orders(OrderID, StoreID, Comment, Status) VALUES (" 
 		+ ID + ", '" + storeID + "', '" + comment + "', '" + status + "')";
-		    System.out.println(insertString);
+		    //System.out.println(insertString);
 			this.executeUpdate(conn, insertString);
 			System.out.println("Insert successful");
 			for(OrderLine a : arr)
@@ -148,7 +148,7 @@ public class Orders {
 	{
 		try {
 		    String deleteString = "DELETE FROM OrderLines WHERE OrderID=" + ID;
-			System.out.println(deleteString);
+			//System.out.println(deleteString);
 			this.executeUpdate(conn, deleteString);
 			System.out.println("OrderLines delete successful");
 		    
@@ -174,7 +174,7 @@ public class Orders {
 	{
 		try {
 		    String newStoreIDString = "UPDATE Orders SET StoreID='" + newStoreID + "' WHERE OrderID=" + ID;
-		    System.out.println(newStoreIDString);
+		    //System.out.println(newStoreIDString);
 			this.executeUpdate(conn, newStoreIDString);
 			System.out.println("Update Store ID successful");
 	    } catch (SQLException e) {
@@ -194,7 +194,7 @@ public class Orders {
 	{
 		try {
 		    String newCommentString = "UPDATE Orders SET Comment='" + newComment + "' WHERE OrderID=" + ID;
-		    System.out.println(newCommentString);
+		    //System.out.println(newCommentString);
 			this.executeUpdate(conn, newCommentString);
 			System.out.println("Update Comment successful");
 	    } catch (SQLException e) {
@@ -214,7 +214,7 @@ public class Orders {
 	{
 		try {
 		    String newStatusString = "UPDATE Orders SET Status='" + newStatus + "' WHERE OrderID=" + ID;
-		    System.out.println(newStatusString);
+		    //System.out.println(newStatusString);
 			this.executeUpdate(conn, newStatusString);
 			System.out.println("Update Status successful");
 	    } catch (SQLException e) {
@@ -234,7 +234,7 @@ public class Orders {
 	{
 		try {
 		    String newStatusString = "UPDATE OrderLines SET Status='" + newStatus + "' WHERE idOrderLines=" + ID;
-		    System.out.println(newStatusString);
+		    //System.out.println(newStatusString);
 			this.executeUpdate(conn, newStatusString);
 			System.out.println("Update Status successful");
 	    } catch (SQLException e) {
