@@ -48,7 +48,8 @@ public class UserScreen {
 	}
 	public void Login() {
 		UserScreen UsSc = new UserScreen();
-		String decision;
+		boolean programRun = false;
+		String decision = "";
 		
 		do {
 			Scanner io = new Scanner (System.in);
@@ -59,13 +60,16 @@ public class UserScreen {
 			String password = io.nextLine();
 			
 			if (UsSc.credentialsValid(username, password)) {
-				InventoryScreen instance = new InventoryScreen();
-				InventoryScreen.run(instance);
+//				System.out.println("Are we here");
+				//int type = 3;//Integer.parseInt(Usr.getTypeByCredentials(username,password));
+				MenuManager.run();
+				programRun = true;
 			} else {
 				System.out.println("Invalid credentials. Would you like to try again? (Y/N)");
+				decision = io.nextLine();
 			}
-			decision = io.nextLine();
-		} while (decision.equalsIgnoreCase("Y"));
+
+		} while (decision.equalsIgnoreCase("Y") || programRun == false);
 		
 	}
 	
@@ -90,7 +94,7 @@ public class UserScreen {
 			
 				if (!Usr.checkUsername(username)) {
 					int userID = Usr.getNextUserID();
-					User newUser = new User(password, userID, username);
+					User newUser = new User(password, userID, username, 1);
 					if (newUser.getUsername(userID) != "") {
 						System.out.println("New User succesfully created.");
 						System.out.println("Username: " + newUser.getUsername(userID));
@@ -105,6 +109,7 @@ public class UserScreen {
 			
 		}
 	}
+	
 	public void exit() {
 		System.out.println("Thank you for using the program.");
 		System.exit(0);

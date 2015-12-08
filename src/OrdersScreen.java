@@ -10,6 +10,30 @@ import java.util.*;
 public class OrdersScreen {
 
 	public static void main(String[] args) {
+		run();
+//		Scanner keyb = new Scanner(System.in);
+//		int input;
+//		
+//		System.out.println("Welcome to the Order Screen Interface. ");
+//		
+//		do {
+//			System.out.println("Enter a command to continue:\n"
+//				+ " 1: Enter a New Order\n"
+//				+ " 2: Look Up an Existing Order\n"
+//				+ " 3: Exit\n");
+//			input = keyb.nextInt();
+//			
+//			if (input == 1) {
+//				addOrder();
+//			} 
+//			
+//			else if (input == 2) {
+//				searchOrder();
+//			} 
+//			} while (input != 3);
+//			System.out.println("Thank you for using the program.");
+	}
+	public static void run() {
 		Scanner keyb = new Scanner(System.in);
 		int input;
 		
