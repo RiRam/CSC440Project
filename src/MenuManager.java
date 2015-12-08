@@ -9,7 +9,7 @@ public class MenuManager {
 		//run();
 	}
 	
-	public static void run() {
+	public static void run(User currentUser) {
 		//InventoryScreen invInstance = new InventoryScreen();
 		OrdersScreen ordInstance = new OrdersScreen();
 		//InventoryScreen.run(instance);
@@ -19,21 +19,25 @@ public class MenuManager {
 				+ "1: Inventory Menu\n"
 				+ "2: Orders Menu\n"
 				+ "3: Picklist\n"
-				+ "4: Log out");
+				+ "4: System Settings\n"
+				+ "5: Log out");
 		Scanner Menuio = new Scanner (System.in);
 		decision = Menuio.nextInt();
 		if (decision == 1) {
-			InventoryScreen.run();
+			currentUser.displayInventoryMenu();
+			//InventoryScreen.run();
 		} else if (decision == 2) {
 			OrdersScreen.run();
 		} else if (decision == 3) {
 			System.out.println("Feature not yet implemented.\n");
 		} else if (decision == 4) {
+			currentUser.displaySystemSettings();
+		} else if (decision == 5) {
 			System.out.println("Logging out.");
 		} else {
 			System.out.println("Invalid option.");
 		}
 		
-		} while (decision != 4);
+		} while (decision != 5);
 	}
 }

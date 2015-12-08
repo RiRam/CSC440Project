@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class Users {
@@ -324,6 +325,37 @@ public class Users {
 		}
 		
 		return userType;
+	}
+	
+	/**
+	 * Return all items present in the table
+	 * 
+	 * @return ArrayList<Item>
+	 */
+	public String getUserInfo()
+	{
+		//ArrayList<User> all = new ArrayList<User>();
+		String output = "";
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+
+	        stmt = conn.createStatement();
+	        rs = stmt.executeQuery("SELECT * FROM Users");
+			
+			rs.first();
+			while(!rs.isAfterLast())
+			{
+				//all.add(new Item(
+				output += "ID: " + rs.getInt(1) + "\n Username: " + rs.getString(2) + "\n Password: " + rs.getString(3) + "\n Type: " + rs.getInt(4) + "\n";
+//				System.out.println(output);
+				rs.next();
+			}
+			
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+			return output;
 	}
 	
 	/**

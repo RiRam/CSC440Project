@@ -61,15 +61,32 @@ public class UserScreen {
 			
 			if (UsSc.credentialsValid(username, password)) {
 //				System.out.println("Are we here");
-				//int type = 3;//Integer.parseInt(Usr.getTypeByCredentials(username,password));
-				MenuManager.run();
-				programRun = true;
+				int type = Integer.parseInt(Usr.getTypeByCredentials(username,password));
+				User currentUser = setUserType(username, password, type);
+				MenuManager.run(currentUser);
+				break;
+				//programRun = true;
 			} else {
 				System.out.println("Invalid credentials. Would you like to try again? (Y/N)");
 				decision = io.nextLine();
 			}
-
-		} while (decision.equalsIgnoreCase("Y") || programRun == false);
+		} while (decision.equalsIgnoreCase("Y"));// || programRun == false);
+		
+	}
+	public User setUserType (String username, String password,int type) {
+		
+		if (type == 1) {
+			User currentUser = new UserStores(username, password, type);
+			return currentUser;
+		} else if (type == 2) {
+			User currentUser = new UserWorkers(username, password, type);
+			return currentUser;
+		} else if (type == 3) {
+			User currentUser = new UserManagers(username, password, type);
+			return currentUser;
+		} else {
+			return null;
+		}
 		
 	}
 	
@@ -94,7 +111,7 @@ public class UserScreen {
 			
 				if (!Usr.checkUsername(username)) {
 					int userID = Usr.getNextUserID();
-					User newUser = new User(password, userID, username, 1);
+					User newUser = new UserStores(password, userID, username, 1);
 					if (newUser.getUsername(userID) != "") {
 						System.out.println("New User succesfully created.");
 						System.out.println("Username: " + newUser.getUsername(userID));
