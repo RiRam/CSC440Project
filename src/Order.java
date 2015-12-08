@@ -165,8 +165,8 @@ public class Order{
 	 */
     public int addOrder() throws IllegalArgumentException{
     	//Thrown exception if non-comment fields are blank
-       // if(this.storeID.equals("") || this.orderLineList.isEmpty())
-        	//throw new IllegalArgumentException("Please do not leave fields blank.");
+        if(this.storeID.equals("") || this.orderLineList.isEmpty())
+        	throw new IllegalArgumentException("Please do not leave fields blank.");
         
     	//Open database connection
     	orderDB = new Orders();
@@ -222,6 +222,5 @@ public class Order{
     	OrderLine newLine = new OrderLine(lineItemID, quantity, "To Be Picked");
     	this.getOrderLineList().add(newLine);
     	return newLine;
-    }
     }
 }
