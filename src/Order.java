@@ -209,4 +209,19 @@ public class Order{
         //Return the order grabbed from the database
         return tempOrder;
     }
+    
+    /**
+	 * Add a new OrderLine to this Order's orderLineList.
+	 * 
+	 * @param lineItemID - The itemID of the item being ordered
+	 * @param quantity - The quantity of the item being ordered
+	 * 
+	 * @return	newLine - The newly-created orderLine
+	 */
+    public OrderLine addOrderLine(int lineItemID, int quantity){
+    	OrderLine newLine = new OrderLine(lineItemID, quantity, "To Be Picked");
+    	this.getOrderLineList().add(newLine);
+    	return newLine;
+    }
+    }
 }
