@@ -228,12 +228,32 @@ public class Orders {
 	 * Update the Status of an OrderLine by a given ID number
 	 * 
 	 * @param ID - OrderLine ID
-	 * @param newStatus - new Comment to assign to Order
+	 * @param newStatus - new Comment to assign to OrderLine
 	 */
 	public void updateOrderLineStatusByID(int ID, String newStatus)
 	{
 		try {
 		    String newStatusString = "UPDATE OrderLines SET Status='" + newStatus + "' WHERE idOrderLines=" + ID;
+		    //System.out.println(newStatusString);
+			this.executeUpdate(conn, newStatusString);
+			System.out.println("Update Status successful");
+	    } catch (SQLException e) {
+			System.out.println("[ERROR: Could not update Status.]");
+			e.printStackTrace();
+			return;
+		}
+	}
+	
+	/**
+	 * Update the Status of an OrderLine by a given Item ID number
+	 * 
+	 * @param ID - Item ID
+	 * @param newStatus - new Comment to assign to OrderLine
+	 */
+	public void updateOrderLineStatusByItemID(int ID, String newStatus)
+	{
+		try {
+		    String newStatusString = "UPDATE OrderLines SET Status='" + newStatus + "' WHERE LineItem=" + ID;
 		    //System.out.println(newStatusString);
 			this.executeUpdate(conn, newStatusString);
 			System.out.println("Update Status successful");
@@ -340,8 +360,11 @@ public class Orders {
 	        stmt = conn.createStatement();
 	        rs = stmt.executeQuery("SELECT * FROM OrderLines WHERE OrderID=" + ID);
 	        rs.first();
-			
-	        arr.add(new OrderLine(rs.getInt(3), rs.getInt(4), rs.getString(5)));
+	        while(!rs.isAfterLast())
+			{
+	        	arr.add(new OrderLine(rs.getInt(3), rs.getInt(4), rs.getString(5)));
+	        	rs.next();
+			}
 			
 		} catch (Exception exc) {
 			exc.printStackTrace();
@@ -364,7 +387,7 @@ public class Orders {
 		ResultSet rs = null;
 		try {
 	        stmt = conn.createStatement();
-	        rs = stmt.executeQuery("SELECT * FROM OrderLines");
+	        rs = stmt.executeQuery("SELECT * FROM OrderLines WHERE Status='To Be Picked'");
 	        rs.first();
     		while(!rs.isAfterLast())
 			{
