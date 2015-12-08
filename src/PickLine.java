@@ -24,7 +24,6 @@ public class PickLine {
 		}
 	}
 	
-	
 	/**
 	 * PickLine Constructor
 	 * @param i

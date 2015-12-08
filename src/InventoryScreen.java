@@ -9,19 +9,19 @@ import java.util.Scanner;
  */
 //extends Applet
 public class InventoryScreen {
-	Inventory inv = new Inventory();
+	private static Inventory inv = new Inventory();
 	String output = "";
-
+	InventoryScreen InSc = new InventoryScreen();
 	/*
 	 * Main Method to run the project
 	 */
 	public static void main(String[] args) 
 	{
 		
-		InventoryScreen InSc = new InventoryScreen();
+		
 		//		System.out.println("");
 //		InSc.test();
-		run(InSc);
+//		run(InSc);
 		
 	}
 	public void test() {
@@ -31,7 +31,7 @@ public class InventoryScreen {
 	 * Runs the display for the inventory interface
 	 * @param IvScreen - Takes in an InventoryScreen Object
 	 */
-	public static void run(InventoryScreen IvScreen) {
+	public static void run() {
 		
 		Scanner scan = new Scanner(System.in);
 		int input = 0;
@@ -47,13 +47,91 @@ public class InventoryScreen {
 			input = scan.nextInt();
 		
 			if (input == 1) {
-				IvScreen.displayItemList();
+				displayItemList();
 			} else if (input == 2) {
-				IvScreen.displayitem();
+				displayitem();
 			} else if (input == 3) {
-				IvScreen.displayEditItem();
+				displayEditItem();
 			} else if (input == 4) 
-				IvScreen.addItem();
+				addItem();
+		} while (input != 5);
+		System.out.println("Thank you for using the program.");
+	}
+	
+	public static void displayOptions(int type) {
+		if (type == 1) {
+			displayOptionsTypeStore();
+		} else if (type == 2) {
+			displayOptionsTypeWorker();
+		} else {
+			displayOptionsTypeManager();
+		}
+	}
+	private static void displayOptionsTypeStore() {
+		Scanner scan = new Scanner(System.in);
+		int input = 0;
+		System.out.println("Welcome to the Inventory Screen Interface. ");
+		do {
+			
+			System.out.println("Enter a command to continue:\n"
+					+ " 1: View Inventory Items\n"
+					+ " 2: View Item\n"
+					+ " 3: Exit\n");
+			input = scan.nextInt();
+		
+			if (input == 1) {
+				displayItemList();
+			} else if (input == 2) {
+				displayitem();
+			} 
+		} while (input != 3);
+		System.out.println("Thank you for using the program.");
+	}
+	private static void displayOptionsTypeWorker() {
+		Scanner scan = new Scanner(System.in);
+		int input = 0;
+		System.out.println("Welcome to the Inventory Screen Interface. ");
+		do {
+			
+			System.out.println("Enter a command to continue:\n"
+					+ " 1: View Inventory Items\n"
+					+ " 2: View Item\n"
+					+ " 3: Edit Item\n"
+					+ " 4: Exit\n");
+			input = scan.nextInt();
+		
+			if (input == 1) {
+				displayItemList();
+			} else if (input == 2) {
+				displayitem();
+			} else if (input == 3) {
+				displayEditItem();
+			} 
+		} while (input != 4);
+		System.out.println("Thank you for using the program.");
+	}
+	private static void displayOptionsTypeManager() {
+		Scanner scan = new Scanner(System.in);
+		int input = 0;
+		System.out.println("Welcome to the Inventory Screen Interface. ");
+		do {
+			
+			System.out.println("Enter a command to continue:\n"
+					+ " 1: View Inventory Items\n"
+					+ " 2: View Item\n"
+					+ " 3: Edit Item\n"
+					+ " 4: Add Item\n"
+					+ " 5: Exit\n");
+			input = scan.nextInt();
+		
+			if (input == 1) {
+				displayItemList();
+			} else if (input == 2) {
+				displayitem();
+			} else if (input == 3) {
+				displayEditItem();
+			} else if (input == 4) 
+				addItem();
 		} while (input != 5);
 		System.out.println("Thank you for using the program.");
 	}
@@ -70,7 +148,7 @@ public class InventoryScreen {
 	/*
 	 * Allows user to edit an item
 	 */
-	public void displayEditItem() {
+	public static void displayEditItem() {
 		Scanner scan = new Scanner (System.in);
 		System.out.println("Enter the ID of the item you would like to edit: ");
 		int inputItem = scan.nextInt();
@@ -118,7 +196,7 @@ public class InventoryScreen {
 	/*
 	 * Displays a list of item objects to the screen
 	 */
-	public void displayItemList() {
+	public static void displayItemList() {
 		ArrayList<Item> itemList = new ArrayList<Item>();
 		itemList = inv.getAllItems();
 		for (Item i : itemList) {
@@ -129,7 +207,7 @@ public class InventoryScreen {
 	 * Displays information for a single item
 	 * @param itemIDString - Item ID as a String
 	 */
-	public void displayitem() { 
+	public static void displayitem() { 
 		Scanner scan = new Scanner (System.in);
 		int inputItem;
 		System.out.println("Enter the ID of the item you would like to view: ");
@@ -147,7 +225,7 @@ public class InventoryScreen {
 	 * Adds a new item to the system 
 	 * @param None
 	 */
-	public void addItem() { 
+	public static void addItem() { 
 		// String name, String description, int available, int picked, String loc
 		Scanner scan = new Scanner (System.in);
 		System.out.println("You are about to add a new item. Are you sure that you would like to continue? (Yes/No)");
