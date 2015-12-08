@@ -1,6 +1,8 @@
 
 import java.util.ArrayList;
-
+/*
+ * By Ryan C
+ */
 public class Picklist {
 	
 	private boolean isPicked;
@@ -15,23 +17,21 @@ public class Picklist {
 		System.out.println(ID);
 		// Find item in array by ID (Which was passed by parameters)
 		//while (we haven't reached the end of the array)
-		//for (int i = 0; i < itemsToPick.size(); i++)
-		//{
-		//	if (if the current item ID == ID) {
-		//		Item currentItem = itemsToPick[i];
-		//		int itemIndex = i;
-		//		break;
-		//	}
-		//}
-		
-		//if (itemsToPick[i].getName != "") {
-		//	itemsToPick[i].setStatus("picked");
-		//}
-		// After we find the item, then we want to set the item's picked status to picked 
-		
-		//itemsToPick.setStatus(ID);
-	
+		for (int i = 0; i < itemsToPick.size(); i++)
+		{
+			if (i == ID) {
+				Item currentItem = itemsToPick.get(i);
+				currentItem.setStatus();
+				//break; ?
+				
+		}
+			else if (itemsToPick.get(i)  == null) {
+				System.out.println("Item is not here");
+			}
+		}
 	}
+	
+	
 	
 	/**
 	 * 1. update all status of "picking" to "picked"
@@ -39,8 +39,21 @@ public class Picklist {
 	 */
 	public void pickAll()
 	{
+		for (int i = 0; i < itemsToPick.size(); i++)
+		{
+	
 		
+			Item currentItem = itemsToPick.get(i);
+			
+			//call the pickline's method status "setStatusPicked" so that i
+			//i is now picked
+			
+			currentItem.setStatusToPicked();
+		}
 	}
+	
+		
+	
 	
 	
 	public Picklist(boolean picked)
