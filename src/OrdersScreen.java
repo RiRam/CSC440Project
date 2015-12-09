@@ -44,7 +44,9 @@ public class OrdersScreen {
 			System.out.println("Enter a command to continue:\n"
 				+ " 1: Enter a New Order\n"
 				+ " 2: Look Up an Existing Order\n"
-				+ " 3: Exit\n");
+				+ " 3: Edit an Existing Order\n"
+				+ " 4: Delete an Order\n"
+				+ " 5: Exit\n");
 			input = keyb.nextInt(); //answer to menu question
 			
 			if (input == 1) {
@@ -53,11 +55,17 @@ public class OrdersScreen {
 			
 			else if (input == 2) {
 				searchOrder(); //method to search order
-			} 
-			} while (input != 3); //exit if done
+			}
+			else if (input ==3) {
+				editOrder(); //edit existing orders
+			}
+			else if (input == 4) {
+				deleteOrder(); //delete an order
+			}
+			} while (input != 5); //exit if done
 			System.out.println("Thank you for using the program.");
 			
-			keyb.close();
+			//keyb.close();
 	}
 	
 	//method to add order
@@ -119,7 +127,7 @@ public class OrdersScreen {
 		
 		System.out.println();
 		
-		keyb.close();
+		//keyb.close();
     }
 	
 	//method to search order
@@ -144,7 +152,79 @@ public class OrdersScreen {
 		System.out.println("Store Id: " + storeId);
 		System.out.println("Comment: " + message);
 		
-		keyb.close();
+		//keyb.close();
+	}
+	
+	public static void editOrder(){
+		Scanner keyb = new Scanner(System.in);
+		Orders orderDB = new Orders();
+		int input, ans;
+		int orderId = 0;
+		String newStoreId = " ", comment = " ";
+		
+		System.out.println("Welcome to the Order Screen Interface. ");
+		
+		do { //loop to print menu till user is done
+			System.out.println("Enter a command to continue:\n"
+				+ " 1: Edit an Orders Store Id\n"
+				+ " 2: Edit an Order Comment\n"
+				+ " 3: Exit\n");
+			input = keyb.nextInt(); //answer to menu question
+			
+			if (input == 1) {
+				System.out.println("Would you like to change an orders Store Id? Enter 1 for yes and 0 for no.");
+				ans = keyb.nextInt();
+				if (ans == 1) {
+					System.out.println("Enter the Order Id of the order you wish to edit.");
+					orderId = keyb.nextInt();
+					System.out.println("Enter the new Store Id.");
+					newStoreId = keyb.nextLine();
+					newStoreId = keyb.nextLine();
+					System.out.println("Changing the Store Id of order number " + orderId + " to " + newStoreId);
+					orderDB.updateStoreIDByID(orderId, newStoreId);
+				}
+				else {
+					System.out.println("Yes was not selected. Setting choice to 0.");
+				}
+			} 
+			
+			else if (input == 2) {
+				System.out.println("Would you like to change an orders comment? Enter 1 for yes and 0 for no.");
+				ans = keyb.nextInt();
+				if (ans == 1) {
+					System.out.println("Enter the Order Id of the order you wish to edit.");
+					orderId = keyb.nextInt();
+					System.out.println("Enter the new comment.");
+					comment = keyb.nextLine();
+					comment = keyb.nextLine();
+					System.out.println("Changing the comment of order number " + orderId + " to \"" + comment + "\"");
+					orderDB.updateCommentByID(orderId, comment);
+				}
+				else {
+					System.out.println("Yes was not selected. Setting choice to 0.");
+				}
+			}
+			} while (input != 3); //exit if done
+	}
+	
+	public static void deleteOrder() {
+		Scanner keyb = new Scanner(System.in);
+		Orders orderDB = new Orders();
+		int ans, orderId;
+		
+		System.out.println("Would you like to delete an order? Enter 1 for yes and 0 for no.");
+		ans = keyb.nextInt();
+		
+		if (ans == 1){
+			System.out.println("Enter the Order Id of the order you wish to delete.");
+			orderId = keyb.nextInt();
+			System.out.println("Deleting or number " + orderId +  ".");
+			orderDB.deleteOrder(orderId);
+			System.out.println("Order number " + orderId +  " was deleted.");
+		}
+		else {
+			System.out.println("Yes was not selected. Setting choice to 0.");
+		}
 	}
 
 }
