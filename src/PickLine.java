@@ -97,4 +97,9 @@ public class PickLine {
 		status = "Picked";
 	}
 	
+	public String toString()
+	{
+		return "PickLine: Item: " + item.getItemName() + "\tQuantity: " + quantity + "\tStatus: " + status;
+	}
+	
 }
