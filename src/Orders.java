@@ -385,14 +385,25 @@ public class Orders {
 		boolean alreadyInArr = false;
 		Statement stmt = null;
 		ResultSet rs = null;
+		
+		System.out.println("Generating PickLines...");
+		
 		try {
 	        stmt = conn.createStatement();
 	        rs = stmt.executeQuery("SELECT * FROM OrderLines WHERE Status='To Be Picked'");
+	        
+	        System.out.println("SQL query...");
+	        
 	        rs.first();
+	        
+	        System.out.println("Commencing while loop...");
+	        
     		while(!rs.isAfterLast())
 			{
+    			System.out.println("First for loop");
     			for(int i = 0; i < arr.size(); i++)
     			{
+    				System.out.println("First for loop i = " + i);
     				if(arr.get(i).getItem().getItemID() == rs.getInt(3))
     				{
     					arr.get(i).addToQuantity(rs.getInt(3));
@@ -400,9 +411,15 @@ public class Orders {
     					break;
     				}
     			}
-    			if(!alreadyInArr)
-					arr.add(new PickLine(rs.getInt(3), rs.getInt(4), rs.getString(5)));
     			
+    			System.out.println("Checking if in picklist already");
+    			if(!alreadyInArr)
+    			{
+    				System.out.println("Adding pickline to the picklist");
+					arr.add(new PickLine(rs.getInt(3), rs.getInt(4), rs.getString(5)));
+    			}
+    			
+    			System.out.println("Already in picklist, adding quantity");
     			picking.add(rs.getInt(1));
     			alreadyInArr = false;
 				rs.next();
@@ -410,7 +427,7 @@ public class Orders {
     		for(Integer i : picking)
     		{
     			this.updateOrderLineStatusByID(i, "Picking");
-    			System.out.println("Setting " + i + "to picking");
+    			System.out.println("Setting " + i + " to picking");
     		}
 	
 		} catch (Exception exc) {
