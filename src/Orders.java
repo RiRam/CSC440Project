@@ -396,6 +396,9 @@ public class Orders {
 	        
 	        rs.first();
 	        
+	        if(!rs.isBeforeFirst())
+	        	throw new IllegalStateException();
+	        
 	        System.out.println("Commencing while loop...");
 	        
     		while(!rs.isAfterLast())
@@ -429,8 +432,10 @@ public class Orders {
     			this.updateOrderLineStatusByID(i, "Picking");
     			System.out.println("Setting " + i + " to picking");
     		}
-	
-		} catch (Exception exc) {
+		} catch (IllegalStateException exc) {
+			System.out.println("No orderlines are marked 'To Be Picked'");
+		}
+		catch (Exception exc) {
 			exc.printStackTrace();
 		}
 		

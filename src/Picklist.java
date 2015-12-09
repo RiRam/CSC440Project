@@ -9,7 +9,7 @@ public class Picklist {
 	private ArrayList<PickLine> itemsToPick;
 	private Orders o;
 	
-	
+	/*
 	public static void main(String[] args)
 	{
 		System.out.println("Creating Picklist object");
@@ -42,6 +42,7 @@ public class Picklist {
 			System.out.println(arr.get(i));
 		}
 	}
+	*/
 	
 	
 	public Picklist()
@@ -58,21 +59,25 @@ public class Picklist {
 	 */
 	public void pickByID(int ID) 
 	{
-		o = new Orders();
-		for (int i = 0; i < itemsToPick.size(); i++)
+		if(itemsToPick.isEmpty())
 		{
-			PickLine currentLine = itemsToPick.get(i);
-			if (currentLine.getItem().getItemID() == ID) 
+			System.out.println("No items in picklist.");
+		}
+		else
+		{
+			o = new Orders();
+			for (int i = 0; i < itemsToPick.size(); i++)
 			{
-				
-				currentLine.setStatusPicked();
-				o.updateOrderLineStatusByItemID(ID, "Picked");
+				PickLine currentLine = itemsToPick.get(i);
+				if (currentLine.getItem().getItemID() == ID) 
+				{
+					
+					currentLine.setStatusPicked();
+					o.updateOrderLineStatusByItemID(ID, "Picked");
+					return;
+				}
 			}
-			
-			else if (itemsToPick.get(i)  == null)
-			{
-				System.out.println("Item is not here");
-			}
+			System.out.print("Item by ID " + ID + " not found.");
 		}
 	}
 	
@@ -82,11 +87,18 @@ public class Picklist {
 	 */
 	public void pickAll()
 	{
-		for (int i = 0; i < itemsToPick.size(); i++)
+		if(itemsToPick.isEmpty())
 		{
-			PickLine currentLine = itemsToPick.get(i);
-			currentLine.setStatusPicked();
-			o.updateOrderLineStatusByItemID(itemsToPick.get(i).getItem().getItemID(), "Picked");
+			System.out.println("No items in picklist.");
+		}
+		else
+		{
+			for (int i = 0; i < itemsToPick.size(); i++)
+			{
+				PickLine currentLine = itemsToPick.get(i);
+				currentLine.setStatusPicked();
+				o.updateOrderLineStatusByItemID(itemsToPick.get(i).getItem().getItemID(), "Picked");
+			}
 		}
 	}
 	
