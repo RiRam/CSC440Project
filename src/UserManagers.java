@@ -64,6 +64,23 @@ public class UserManagers extends User {
 		} while (input != 5);
 		System.out.println("Thank you for using the program.");
 	}
+	
+	void displayPickListMenu() {
+		// Welcome the User
+		int decision = 0;
+		
+		do {
+		System.out.println("Welcome to the Picklist Screen Interface\n"
+				+ "Enter a command to continue\n"
+				+ "1: View Picklist\n"
+				+ "2: Pick All \n"
+				+ "3: Pick Item\n"
+				+ "4: Exit\n");
+		decision = PicklistScreen.computeDecision();
+		} while (decision != 4);
+		System.out.println("Thank you for using the program.");
+	}
+	
 	void displaySystemSettings() {
 		
 		Scanner scan = new Scanner(System.in);
