@@ -9,7 +9,7 @@ public class Picklist {
 	private ArrayList<PickLine> itemsToPick;
 	private Orders o;
 	
-	/*
+	
 	public static void main(String[] args)
 	{
 		System.out.println("Creating Picklist object");
@@ -42,7 +42,7 @@ public class Picklist {
 			System.out.println(arr.get(i));
 		}
 	}
-	*/
+	
 	
 	public Picklist()
 	{

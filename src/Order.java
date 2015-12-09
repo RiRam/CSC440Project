@@ -223,8 +223,4 @@ public class Order {
     	this.getOrderLineList().add(newLine);
     	return newLine;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> a645561e13a68f27dc0f3159c75b9c14f992a0bf
