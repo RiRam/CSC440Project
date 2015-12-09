@@ -31,6 +31,7 @@ public abstract class User {
 	abstract void displayInventoryMenu ();
 	abstract void displaySystemSettings();
 	abstract void displayOrdersMenu();
+	abstract void displayPickListMenu();
 }
 	
 //public class User {

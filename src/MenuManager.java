@@ -29,7 +29,8 @@ public class MenuManager {
 		} else if (decision == 2) {
 			currentUser.displayOrdersMenu();// OrdersScreen.run();
 		} else if (decision == 3) {
-			System.out.println("Feature not yet implemented.\n");
+			currentUser.displayPickListMenu();
+			//System.out.println("Feature not yet implemented.\n");
 		} else if (decision == 4) {
 			currentUser.displaySystemSettings();
 		} else if (decision == 5) {

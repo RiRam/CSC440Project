@@ -20,11 +20,11 @@ public class PicklistScreen {
 				+ "2: Pick All \n"
 				+ "3: Pick Item\n"
 				+ "4: Exit\n");
-		decision = computeDecision();
+		decision = PicklistScreen.computeDecision();
 		} while (decision != 4);
 		System.out.println("Thank you for using the program.");
 	}
-	private static int computeDecision() {
+	public static int computeDecision() {
 		Scanner io = new Scanner(System.in);
 		int input = io.nextInt(); 
 		

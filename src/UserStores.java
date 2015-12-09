@@ -63,7 +63,9 @@ public class UserStores extends User {
 			} while (input != 4); //exit if done
 			System.out.println("Thank you for using the program.");
 	}
-	
+	void displayPickListMenu() {
+		System.out.println("\nYou do not have permission to access these features. Please contact your administrator for access.\n");
+	}
 	void displaySystemSettings() {
 		System.out.println("\nYou do not have permission to access these features. Please contact your administrator for access.\n");
 	}
