@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class PickLine {
 	private Item item = new Item();
+	private int itemID;
 	private int quantity;
 	private String status;
 	private static Inventory inv;
@@ -31,6 +32,7 @@ public class PickLine {
 	 */
 	public PickLine(int ID, int quant, String s)
 	{
+		itemID = ID;
 		inv = new Inventory();
 		item = inv.getItem(ID);
 		inv.close();
@@ -99,7 +101,7 @@ public class PickLine {
 	
 	public String toString()
 	{
-		return "PickLine: Item: " + item.getItemName() + "\tQuantity: " + quantity + "\tStatus: " + status;
+		return "PickLine: Item: " + item.getItemName() + "\tID: " + itemID + "\tQuantity: " + quantity + "\tStatus: " + status;
 	}
 	
 }
