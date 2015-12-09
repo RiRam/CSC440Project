@@ -6,26 +6,26 @@ import java.util.ArrayList;
 public class Picklist {
 	
 	private boolean isPicked;
-	private ArrayList<Item> itemsToPick = new ArrayList<Item>();
+	private ArrayList<PickLine> itemsToPick  = new ArrayList<PickLine>();
 	
 	/**
-	 * In the arraylist, update the status of the pickline w/ item ID = ID to be "picked"
+	 * In the Array list, update the status of the pick line w/ item ID = ID to be "picked"
 	 * @param ID
 	 */
 	public void pickByID(int ID) 
 	{
 		System.out.println(ID);
-		// Find item in array by ID (Which was passed by parameters)
-		//while (we haven't reached the end of the array)
 		for (int i = 0; i < itemsToPick.size(); i++)
 		{
-			if (i == ID) {
-				Item currentItem = itemsToPick.get(i);
-				currentItem.setStatus();
-				//break; ?
+			PickLine currentLine = itemsToPick.get(i);
+			if (currentLine.getItem().getItemID() == ID) 
+			{
 				
-		}
-			else if (itemsToPick.get(i)  == null) {
+				currentLine.setStatusPicked();
+			}
+			
+			else if (itemsToPick.get(i)  == null)
+			{
 				System.out.println("Item is not here");
 			}
 		}
@@ -34,25 +34,19 @@ public class Picklist {
 	
 	
 	/**
-	 * 1. update all status of "picking" to "picked"
-	 * 2. update all order lines w/ status "picking" to "picked"
+	 * Pick all of the items in the picklist and set it to picked
 	 */
 	public void pickAll()
 	{
 		for (int i = 0; i < itemsToPick.size(); i++)
 		{
-	
-		
-			Item currentItem = itemsToPick.get(i);
-			
-			//call the pickline's method status "setStatusPicked" so that i
-			//i is now picked
-			
-			currentItem.setStatusToPicked();
+			PickLine currentLine = itemsToPick.get(i);
+			currentLine.setStatusPicked();
 		}
 	}
 	
-		
+	
+	
 	
 	
 	
