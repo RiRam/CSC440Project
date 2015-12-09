@@ -30,6 +30,7 @@ public abstract class User {
 	
 	abstract void displayInventoryMenu ();
 	abstract void displaySystemSettings();
+	abstract void displayOrdersMenu();
 }
 	
 //public class User {

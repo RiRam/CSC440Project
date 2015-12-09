@@ -45,11 +45,14 @@ public class PicklistScreen {
 		}
 	}
 	public static void viewPickLines() {
-		System.out.println("Entered?");
+		//System.out.println(pickList.toString());
+		if (pickListArray.size() == 0) {
+			System.out.println("\nThere are no items to be picked.\n");
+		} else {
 		for(int i = 0; i < pickListArray.size(); i++)
 		{
-			System.out.println("Entered?");
 			System.out.println(pickListArray.get(i).getItem().getItemName());
+		}
 		}
 	}
 	public static void pickItem () {

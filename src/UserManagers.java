@@ -6,6 +6,38 @@ public class UserManagers extends User {
 		super(newPassword, newUsername, userType);
 		// TODO Auto-generated constructor stub
 	}
+	
+	void displayOrdersMenu() {
+		Scanner keyb = new Scanner(System.in);
+		int input; // answer to menu question
+		
+		System.out.println("Welcome to the Order Screen Interface. ");
+		
+		do { //loop to print menu till user is done
+			System.out.println("Enter a command to continue:\n"
+				+ " 1: Enter a New Order\n"
+				+ " 2: Look Up an Existing Order\n"
+				+ " 3: Edit an Existing Order\n"
+				+ " 4: Delete an Order\n"
+				+ " 5: Exit\n");
+			input = keyb.nextInt(); //answer to menu question
+			
+			if (input == 1) {
+				OrdersScreen.addOrder(); //method to add order
+			} 
+			
+			else if (input == 2) {
+				OrdersScreen.searchOrder(); //method to search order
+			}
+			else if (input ==3) {
+				OrdersScreen.editOrder(); //edit existing orders
+			}
+			else if (input == 4) {
+				OrdersScreen.deleteOrder(); //delete an order
+			}
+			} while (input != 5); //exit if done
+			System.out.println("Thank you for using the program.");
+	}
 
 	void displayInventoryMenu() {
 		Scanner scan = new Scanner(System.in);

@@ -27,7 +27,7 @@ public class MenuManager {
 			currentUser.displayInventoryMenu();
 			//InventoryScreen.run();
 		} else if (decision == 2) {
-			OrdersScreen.run();
+			currentUser.displayOrdersMenu();// OrdersScreen.run();
 		} else if (decision == 3) {
 			System.out.println("Feature not yet implemented.\n");
 		} else if (decision == 4) {
