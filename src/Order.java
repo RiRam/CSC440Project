@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Glenn Gibbons
  * @version 11-18-15
  */
-public class Order{
+public class Order {
 	
     private String storeID, comment, orderStatus;
     	//Status can be: "To be picked", "Picking" or "Picked"
@@ -218,13 +218,9 @@ public class Order{
 	 * 
 	 * @return	newLine - The newly-created orderLine
 	 */
-    public OrderLine addOrderLine(int lineItemID, int quantity){
+    public OrderLine addOrderLine(int lineItemID, int quantity) {
     	OrderLine newLine = new OrderLine(lineItemID, quantity, "To Be Picked");
     	this.getOrderLineList().add(newLine);
     	return newLine;
     }
-<<<<<<< HEAD
 }
-=======
-    }
->>>>>>> 9c0c6ea5015955db8bc9edd583f96107d341b180
