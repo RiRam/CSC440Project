@@ -16,13 +16,13 @@ import java.util.ArrayList;
 
 public class Inventory {
 	/** The name of the MySQL account to use */
-	private final String userName = "admin";
+	private final String userName = "";
 
 	/** The password for the MySQL account */
-	private final String password = "warehouse";
+	private final String password = "";
 
 	/** The name of the computer running the database on it */
-	private final String serverName = "warehouse.cd2f0yi9ywlu.us-west-2.rds.amazonaws.com";
+	private final String serverName = "";
 	
 	/** The port of the MySQL server (default is 3306) */
 	private final int portNumber = 3306;
